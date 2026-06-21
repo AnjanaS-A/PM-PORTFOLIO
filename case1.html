@@ -38,7 +38,6 @@
   a{ color:inherit; text-decoration:none; }
   :focus-visible{ outline:2px solid var(--pin); outline-offset:2px; }
 
-  /* ===== Header (matches homepage) ===== */
   header{
     display:flex;
     justify-content:space-between;
@@ -63,7 +62,6 @@
   .back-link{ display:flex; align-items:center; gap:6px; }
   .back-link svg{ width:14px; height:14px; }
 
-  /* ===== Hero ===== */
   .case-hero{ padding:clamp(36px,6vw,64px) clamp(20px,5vw,64px) 0; max-width:1100px; }
   .case-tags{ display:flex; gap:8px; align-items:center; margin-bottom:18px; flex-wrap:wrap; }
   .tag-num{
@@ -89,7 +87,6 @@
     background:var(--card);
   }
 
-  /* ===== Layout: sticky side nav + content ===== */
   .case-body{
     display:grid;
     grid-template-columns: 230px 1fr;
@@ -133,7 +130,6 @@
   }
   .side-nav button.active .step-no{ color:var(--pin); }
 
-  /* ===== Panels ===== */
   .panels{ min-width:0; }
   .panel{ display:none; animation: fadeIn .25s ease; }
   .panel.active{ display:block; }
@@ -164,7 +160,6 @@
   .callout.pin{ background:var(--pin-pale); border-left-color:var(--pin); }
   .callout b{ font-family:'JetBrains Mono', monospace; font-size:0.78rem; text-transform:uppercase; display:block; margin-bottom:6px; letter-spacing:0.05em; }
 
-  /* ===== Source citation chips ===== */
   .src{
     font-family:'JetBrains Mono', monospace;
     font-size:0.68rem;
@@ -178,7 +173,6 @@
   }
   .sources-block li{ margin-bottom:4px; list-style:none; }
 
-  /* ===== Stat cards ===== */
   .stat-grid{
     display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
     gap:14px; margin:22px 0;
@@ -191,7 +185,19 @@
   .stat-label{ font-size:0.78rem; color:var(--ink-soft); margin-top:4px; }
   .stat-src{ font-family:'JetBrains Mono', monospace; font-size:0.62rem; color:var(--mute); margin-top:8px; }
 
-  /* ===== Bar chart (pure SVG/CSS) ===== */
+  .stat-img-wrap{
+    width:100%;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    border-radius:6px;
+    margin-bottom:12px;
+  }
+  .stat-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
   .chart-wrap{
     background:var(--card); border:1px solid var(--line); border-radius:6px;
     padding:22px 20px; margin:22px 0;
@@ -204,7 +210,6 @@
   .bar-fill.pin{ background:var(--pin); }
   .bar-fill span{ font-family:'JetBrains Mono', monospace; font-size:0.68rem; color:var(--paper); font-weight:600; }
 
-  /* ===== Journey steps ===== */
   .journey{ display:flex; flex-direction:column; gap:0; margin:24px 0; }
   .j-step{ display:grid; grid-template-columns:40px 1fr; gap:16px; padding-bottom:28px; position:relative; }
   .j-step:not(:last-child)::before{
@@ -218,7 +223,6 @@
   .j-content h3{ font-family:'Spectral', serif; font-weight:600; font-size:1.08rem; margin-bottom:6px; }
   .j-content p{ font-size:0.9rem; color:var(--ink-soft); margin-bottom:0; }
 
-  /* ===== mockup SVGs ===== */
   .mockup-frame{
     background:var(--card); border:1px solid var(--line); border-radius:8px;
     padding:18px; margin:22px 0; display:flex; justify-content:center;
@@ -226,7 +230,6 @@
   .mockup-frame svg{ max-width:100%; height:auto; }
   .mockup-caption{ text-align:center; font-family:'JetBrains Mono', monospace; font-size:0.7rem; color:var(--mute); margin-top:10px; }
 
-  /* ===== RICE table ===== */
   .rice-table{ width:100%; border-collapse:collapse; margin:20px 0; font-size:0.86rem; }
   .rice-table th{
     font-family:'JetBrains Mono', monospace; font-size:0.7rem; text-transform:uppercase;
@@ -237,7 +240,6 @@
   .rice-table tr:last-child td{ font-weight:700; color:var(--ink); background:var(--teal-pale); }
   .rice-table td:first-child{ font-weight:600; color:var(--ink); }
 
-  /* ===== Prev/next footer nav ===== */
   .case-foot-nav{
     display:flex; justify-content:space-between; align-items:center;
     max-width:1100px; margin:0 auto; padding:0 clamp(20px,5vw,64px) 60px;
@@ -284,7 +286,7 @@
       All cases
     </a>
     <a href="https://www.linkedin.com/in/anjana1316/" target="_blank" rel="noopener">LinkedIn ↗</a>
-    <a href="mail to:anjanasa066@gmail.com">Contact</a>
+    <a href="mailto:anjanasa066@gmail.com">Contact</a>
   </nav>
 </header>
 
@@ -317,13 +319,10 @@
   <div class="panels">
 
     <!-- 01 PROBLEM -->
-<div class="callout">
-
-    <b>30 / 90 / 365-day view</b>
-
-    At 30 days: does the QR-shown cohort complete checkout at a meaningfully higher rate than control, holding order value constant? At 90 days: does that lift hold once the novelty of "a QR code at checkout" wears off, or does it decay toward baseline? At 365 days: has it changed user behavior upstream- fewer users opening a second tab at all, because they've learned the deal will show up in-app?
-
-  </div>
+    <div class="panel active" id="panel-problem">
+      <div class="panel-eyebrow">The problem</div>
+      <h2>Why users leave the app at checkout</h2>
+      <p>62% of online shoppers search for a coupon before completing a purchase. On mobile food-delivery apps, that search means leaving the checkout screen — opening a browser tab, searching for a code, and either returning empty-handed or not returning at all.</p>
 
       <div class="stat-grid">
         <div class="stat-card">
@@ -418,7 +417,7 @@
       <div class="mockup-frame">
         <svg viewBox="0 0 520 200" width="520">
           <rect width="520" height="200" rx="8" fill="#F6F3EC"/>
-          <text x="130" y="24" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#1F2421">Three jobs, one checkout moment</text>
+          <text x="260" y="24" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#1F2421">Three jobs, one checkout moment</text>
           <g transform="translate(20,44)">
             <rect width="145" height="130" rx="8" fill="#fff" stroke="#C9C2B2" stroke-width="1.5"/>
             <circle cx="72" cy="34" r="16" fill="#DCEAE9"/>
@@ -575,56 +574,44 @@
       <p>💡 <strong>Key insight:</strong> the user isn't actually loyal to coupon-hunting- they're loyal to not feeling like they overpaid. If the app removes the need to leave and search, it doesn't lose the bargain-hunting behavior, it just relocates it to a moment the app controls.</p>
     </div>
 
-<!-- 06 METRICS -->
-<div class="panel" id="panel-metrics">
-  <div class="panel-eyebrow">Success metrics</div>
-  <h2>How I'd know it's working</h2>
-  <p><strong>North star:</strong> checkout completion rate among sessions where the QR offer was shown vs. a held-out control. Everything else is a supporting or guardrail metric underneath that.</p>
-  <div class="stat-grid">
+    <!-- 06 METRICS -->
+    <div class="panel" id="panel-metrics">
+      <div class="panel-eyebrow">Success metrics</div>
+      <h2>How I'd know it's working</h2>
+      <p><strong>North star:</strong> checkout completion rate among sessions where the QR offer was shown vs. a held-out control. Everything else is a supporting or guardrail metric underneath that.</p>
+      <div class="stat-grid">
 
-    <div class="stat-card">
-      <div class="stat-img-wrap">
-        <img
-          src="qrmetrics1.png"
-          alt="Checkout completion rate illustration"
-          class="stat-img"
-        />
+        <div class="stat-card">
+          <div class="stat-img-wrap">
+            <img src="qr-metrics-1.png" alt="Checkout completion rate illustration" class="stat-img"/>
+          </div>
+          <div class="stat-label">Checkout completion rate, QR-shown vs. control</div>
+          <div class="stat-src">North star</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-img-wrap">
+            <img src="qr-metrics-2.png" alt="Off-app exits during checkout illustration" class="stat-img"/>
+          </div>
+          <div class="stat-label">Off-app exits during checkout (tab switches / app backgrounding)</div>
+          <div class="stat-src">Leading indicator</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-img-wrap">
+            <img src="qr-metrics-3.png" alt="Average discount cost per completed order illustration" class="stat-img"/>
+          </div>
+          <div class="stat-label">Average discount cost per completed order</div>
+          <div class="stat-src">Counter-metric / guardrail</div>
+        </div>
+
       </div>
-      <div class="stat-label">Checkout completion rate, QR-shown vs. control</div>
-      <div class="stat-src">North star</div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-img-wrap">
-        <img
-          src="qrmetrics2.png"
-          alt="Off-app exits during checkout illustration"
-          class="stat-img"
-        />
+      <p>The counter-metric matters most here: it's easy to lift completion rate by simply giving away large discounts. The real test of this concept is whether it lifts completion <em>without</em> increasing average discount depth beyond what the team would already budget for promotions- i.e., is it making existing offers more effective, not just making offers bigger.</p>
+      <div class="callout">
+        <b>30 / 90 / 365-day view</b>
+        At 30 days: does the QR-shown cohort complete checkout at a meaningfully higher rate than control, holding order value constant? At 90 days: does that lift hold once the novelty of "a QR code at checkout" wears off, or does it decay toward baseline? At 365 days: has it changed user behavior upstream- fewer users opening a second tab at all, because they've learned the deal will show up in-app?
       </div>
-      <div class="stat-label">Off-app exits during checkout (tab switches / app backgrounding)</div>
-      <div class="stat-src">Leading indicator</div>
     </div>
-
-    <div class="stat-card">
-      <div class="stat-img-wrap">
-        <img
-          src="qrmetrics3.png"
-          alt="Average discount cost per completed order illustration"
-          class="stat-img"
-        />
-      </div>
-      <div class="stat-label">Average discount cost per completed order</div>
-      <div class="stat-src">Counter-metric / guardrail</div>
-    </div>
-
-  </div>
-  <p>The counter-metric matters most here: it's easy to lift completion rate by simply giving away large discounts. The real test of this concept is whether it lifts completion <em>without</em> increasing average discount depth beyond what the team would already budget for promotions- i.e., is it making existing offers more effective, not just making offers bigger.</p>
-<div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-left: 4px solid #0d6efd; padding: 1rem 1.25rem; border-radius: 0.25rem; margin-bottom: 1rem; font-family: sans-serif; color: #212529; line-height: 1.5;">
-    <b style="display: block; margin-bottom: 0.5rem; font-size: 1.1rem; color: #1a1a1a;">30 / 90 / 365-day view</b>
-    At 30 days: does the QR-shown cohort complete checkout at a meaningfully higher rate than control, holding order value constant? At 90 days: does that lift hold once the novelty of "a QR code at checkout" wears off, or does it decay toward baseline? At 365 days: has it changed user behavior upstream- fewer users opening a second tab at all, because they've learned the deal will show up in-app?
-</div>
-</div>
 
     <!-- 07 REFLECTIONS -->
     <div class="panel" id="panel-reflections">
@@ -643,7 +630,7 @@
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
     All cases
   </a>
-  <a href="case-02.html">
+  <a href="case2.html">
     Next case
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
   </a>
@@ -651,18 +638,18 @@
 
 <footer>
   <span>Bengaluru · 2026</span>
-  <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+  <a href="https://www.linkedin.com/in/anjana1316/" target="_blank" rel="noopener">LinkedIn ↗</a>
 </footer>
 
 <script>
   const navButtons = document.querySelectorAll('.side-nav button');
   const panels = document.querySelectorAll('.panel');
 
-  navButtons.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
       const target = btn.dataset.panel;
-      navButtons.forEach(b=>b.classList.remove('active'));
-      panels.forEach(p=>p.classList.remove('active'));
+      navButtons.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('panel-' + target).classList.add('active');
       window.scrollTo({ top: document.querySelector('.case-body').offsetTop - 90, behavior: 'smooth' });
