@@ -394,7 +394,7 @@
           <path d="M585 295 L663 205" stroke="#5C6273" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
         </svg>
       </div>
-      <div class="pipeline-caption">Redrawn from the deployed Dify workflow · solid lines = resume/text path · dashed lines = job description path · LLM 3 receives raw JD, not keyword list</div>
+      <div class="pipeline-caption">Deployed Dify workflow · solid lines = resume/text path · dashed lines = job description path · LLM 3 receives raw JD, not keyword list</div>
 
       <p>The detail that took the most iteration: <strong>LLM 2 (resume rewrite) consumes both the Doc Extractor output and the keyword list from LLM 1</strong>, but <strong>LLM 3 (cover letter) bypasses LLM 1 entirely</strong> and reads the raw job description directly. That's deliberate, not an oversight: a resume benefits from dense, ATS-targeted keyword presence; a cover letter that's visibly keyword-stuffed reads as robotic to a human reader. Same job description, two different downstream needs, so the pipeline routes data differently for each.</p>
 
