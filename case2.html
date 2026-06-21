@@ -40,7 +40,6 @@
   a{ color:inherit; text-decoration:none; }
   :focus-visible{ outline:2px solid var(--blue); outline-offset:2px; }
 
-  /* ===== Header ===== */
   header{
     display:flex; justify-content:space-between; align-items:center;
     padding:26px clamp(20px,5vw,64px) 16px;
@@ -60,7 +59,6 @@
   .back-link{ display:flex; align-items:center; gap:6px; }
   .back-link svg{ width:13px; height:13px; }
 
-  /* ===== Hero ===== */
   .case-hero{ padding:clamp(36px,6vw,64px) clamp(20px,5vw,64px) 0; max-width:1100px; }
   .case-tags{ display:flex; gap:8px; align-items:center; margin-bottom:18px; flex-wrap:wrap; }
   .tag-num{
@@ -94,7 +92,6 @@
   .live-link:hover{ background:rgba(124,158,255,0.2); }
   .live-link svg{ width:13px; height:13px; }
 
-  /* ===== Layout ===== */
   .case-body{
     display:grid; grid-template-columns: 220px 1fr; gap:48px;
     max-width:1100px; margin:0 auto;
@@ -144,7 +141,6 @@
   .callout.coral{ background:var(--coral-pale); border-left-color:var(--coral); }
   .callout.coral b{ color:var(--coral); }
 
-  /* ===== Prompt blocks ===== */
   .prompt-block{
     background:var(--card); border:1px solid var(--line); border-radius:8px;
     margin:18px 0; overflow:hidden;
@@ -164,20 +160,22 @@
   .prompt-body .var{ color:var(--mint); }
   .prompt-body .rule{ color:var(--blue); }
 
-  /* ===== Pipeline diagram ===== */
   .pipeline-frame{
     background:var(--card); border:1px solid var(--line); border-radius:10px;
     padding:24px 18px; margin:22px 0; overflow-x:auto;
   }
   .pipeline-caption{ text-align:center; font-size:0.68rem; color:var(--mute); margin-top:12px; font-family:'JetBrains Mono', monospace; }
 
-  /* ===== Stat / fact cards ===== */
+  /* ===== Why-built stat cards — bigger centred text ===== */
   .stat-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(170px,1fr)); gap:14px; margin:22px 0; }
-  .stat-card{ background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px 15px; }
-  .stat-num{ font-family:'Inter', sans-serif; font-weight:800; font-size:1.6rem; color:var(--blue); }
-  .stat-label{ font-size:0.72rem; color:var(--text-soft); margin-top:4px; font-family:'Inter', sans-serif; }
+  .stat-card{
+    background:var(--card); border:1px solid var(--line); border-radius:8px;
+    padding:24px 16px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  }
+  .stat-num{ font-family:'Inter', sans-serif; font-weight:800; font-size:2.4rem; color:var(--blue); line-height:1; }
+  .stat-label{ font-size:0.8rem; color:var(--text-soft); margin-top:8px; font-family:'Inter', sans-serif; line-height:1.5; }
 
-  /* ===== Flow steps ===== */
   .journey{ display:flex; flex-direction:column; gap:0; margin:24px 0; }
   .j-step{ display:grid; grid-template-columns:36px 1fr; gap:16px; padding-bottom:24px; position:relative; }
   .j-step:not(:last-child)::before{ content:""; position:absolute; left:17px; top:34px; bottom:0; width:1px; background:var(--line); }
@@ -188,7 +186,6 @@
   .j-content h3{ font-family:'Inter', sans-serif; font-weight:700; font-size:0.96rem; margin-bottom:5px; color:#fff; }
   .j-content p{ font-size:0.82rem; color:var(--text-soft); margin-bottom:0; font-family:'Inter', sans-serif; }
 
-  /* ===== Screenshot frame ===== */
   .screenshot-frame{
     border-radius:10px; overflow:hidden; border:1px solid var(--line); margin:22px 0;
   }
@@ -271,12 +268,12 @@
 
   <div class="panels">
 
-    <!-- 01 PROBLEM / WHY -->
+    <!-- 01 WHY I BUILT THIS -->
     <div class="panel active" id="panel-problem">
       <div class="panel-eyebrow">Why I built this</div>
       <h2>I wanted to actually build with agents and LLM chains, not just talk about them</h2>
-      <p>This is my passion project- the one case study in this portfolio that isn't a strategy proposal but a real, working build. I wanted hands-on experience designing a multi-step LLM pipeline: how to split a task across specialized prompts, pass structured data between them, and handle the messy edge cases that any AI tool hits in practice (missing data, placeholder text, formatting drift).</p>
-      <p>The product question behind it is real too: most "AI resume builder" tools rewrite tone and formatting but don't actually engage with the specific job description in front of you. I wanted to test whether a tightly-scoped, ATS-aware pipeline could do better- extracting the actual keywords a given JD cares about, and writing toward them, rather than producing one generic "improved" resume regardless of role.</p>
+      <p>This is my passion project- the one case study in this portfolio that isn't a strategy proposal but a <strong>real, working build</strong>. I wanted hands-on experience designing a multi-step LLM pipeline: how to split a task across specialized prompts, pass structured data between them, and handle the messy edge cases that any AI tool hits in practice (missing data, placeholder text, formatting drift).</p>
+      <p>The product question behind it is real too: most "AI resume builder" tools rewrite tone and formatting but <strong>don't actually engage with the specific job description</strong> in front of you. I wanted to test whether a tightly-scoped, ATS-aware pipeline could do better- extracting the actual keywords a given JD cares about, and writing toward them, rather than producing one generic "improved" resume regardless of role.</p>
 
       <div class="stat-grid">
         <div class="stat-card">
@@ -285,7 +282,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-num">1</div>
-          <div class="stat-label">model used throughout- Gemini 2.5 Flash (free tier)</div>
+          <div class="stat-label">model used throughout — Gemini 2.5 Flash (free tier)</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">5</div>
@@ -294,14 +291,14 @@
       </div>
     </div>
 
-    <!-- 02 ARCHITECTURE -->
+    <!-- 02 ARCHITECTURE / PIPELINE -->
     <div class="panel" id="panel-architecture">
       <div class="panel-eyebrow">The pipeline</div>
       <h2>How the workflow is actually wired</h2>
-      <p>Built and deployed in Dify. Three user inputs feed a document extractor, which fans out to three parallel-ish LLM calls with different jobs, converging on a single output block.</p>
+      <p>Built and deployed in Dify. Three user inputs feed a document extractor, which passes parsed resume text to LLM 2 and LLM 3. LLM 1 runs in parallel on the job description only, and its keyword output feeds exclusively into LLM 2. All three LLM outputs converge at a single output block.</p>
 
       <div class="pipeline-frame">
-        <svg viewBox="0 0 880 320" width="100%" style="min-width:760px;">
+        <svg viewBox="0 0 900 340" width="100%" style="min-width:760px;">
           <defs>
             <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
               <path d="M0,0 L8,4 L0,8 Z" fill="#5C6273"/>
@@ -328,61 +325,82 @@
             <text x="14" y="56" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">→ plain text</text>
           </g>
 
-          <!-- LLM (keywords) -->
+          <!-- LLM 1 (keywords) — fed by Job_description only, NOT doc extractor -->
           <g transform="translate(420,20)">
-            <rect width="160" height="78" rx="8" fill="#161A24" stroke="#7C9EFF" stroke-width="1.5"/>
-            <circle cx="140" cy="14" r="5" fill="#5FD9A4"/>
-            <text x="14" y="22" font-family="Inter" font-size="10" font-weight="700" fill="#E8EAED">LLM · Keywords</text>
+            <rect width="165" height="78" rx="8" fill="#161A24" stroke="#7C9EFF" stroke-width="1.5"/>
+            <circle cx="145" cy="14" r="5" fill="#5FD9A4"/>
+            <text x="14" y="22" font-family="Inter" font-size="10" font-weight="700" fill="#E8EAED">LLM 1 · Keywords</text>
             <text x="14" y="42" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">ATS extraction from</text>
-            <text x="14" y="56" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">Job_description</text>
-            <text x="14" y="70" font-family="JetBrains Mono" font-size="7.5" fill="#5C6273">Gemini 2.5 Flash · retry x3</text>
+            <text x="14" y="56" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">Job_description only</text>
+            <text x="14" y="70" font-family="JetBrains Mono" font-size="7.5" fill="#5C6273">Gemini 2.5 Flash · retry ×3</text>
           </g>
 
-          <!-- LLM 2 (resume) -->
-          <g transform="translate(420,140)">
-            <rect width="160" height="78" rx="8" fill="#161A24" stroke="#7C9EFF" stroke-width="1.5"/>
-            <circle cx="140" cy="14" r="5" fill="#5FD9A4"/>
+          <!-- LLM 2 (resume) — fed by Doc Extractor + LLM 1 keywords -->
+          <g transform="translate(420,145)">
+            <rect width="165" height="90" rx="8" fill="#161A24" stroke="#7C9EFF" stroke-width="1.5"/>
+            <circle cx="145" cy="14" r="5" fill="#5FD9A4"/>
             <text x="14" y="22" font-family="Inter" font-size="10" font-weight="700" fill="#E8EAED">LLM 2 · Resume</text>
-            <text x="14" y="42" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">rewrites resume w/</text>
-            <text x="14" y="56" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">role + keywords</text>
-            <text x="14" y="70" font-family="JetBrains Mono" font-size="7.5" fill="#5C6273">Gemini 2.5 Flash · retry x3</text>
+            <text x="14" y="42" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">Doc Extractor text +</text>
+            <text x="14" y="56" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">LLM 1 keywords → rewrite</text>
+            <text x="14" y="70" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">role-targeted bullets</text>
+            <text x="14" y="84" font-family="JetBrains Mono" font-size="7.5" fill="#5C6273">Gemini 2.5 Flash · retry ×3</text>
           </g>
 
-          <!-- LLM 3 (cover letter) -->
-          <g transform="translate(420,250)">
-            <rect width="160" height="60" rx="8" fill="#161A24" stroke="#7C9EFF" stroke-width="1.5"/>
-            <circle cx="140" cy="14" r="5" fill="#5FD9A4"/>
+          <!-- LLM 3 (cover letter) — fed by Doc Extractor + raw Job_description (NOT keywords) -->
+          <g transform="translate(420,265)">
+            <rect width="165" height="68" rx="8" fill="#161A24" stroke="#7C9EFF" stroke-width="1.5"/>
+            <circle cx="145" cy="14" r="5" fill="#5FD9A4"/>
             <text x="14" y="22" font-family="Inter" font-size="10" font-weight="700" fill="#E8EAED">LLM 3 · Cover Letter</text>
-            <text x="14" y="42" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">resume + full JD → letter</text>
-            <text x="14" y="56" font-family="JetBrains Mono" font-size="7.5" fill="#5C6273">Gemini 2.5 Flash · retry x3</text>
+            <text x="14" y="42" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">Doc Extractor text +</text>
+            <text x="14" y="56" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">raw Job_description → letter</text>
+            <text x="14" y="66" font-family="JetBrains Mono" font-size="7.5" fill="#5C6273">Gemini 2.5 Flash · retry ×3</text>
           </g>
 
           <!-- OUTPUT -->
-          <g transform="translate(660,130)">
-            <rect width="150" height="80" rx="8" fill="#161A24" stroke="#FF8A65" stroke-width="1.5"/>
-            <circle cx="130" cy="14" r="5" fill="#5FD9A4"/>
+          <g transform="translate(665,140)">
+            <rect width="155" height="80" rx="8" fill="#161A24" stroke="#FF8A65" stroke-width="1.5"/>
+            <circle cx="135" cy="14" r="5" fill="#5FD9A4"/>
             <text x="14" y="22" font-family="Inter" font-size="10" font-weight="700" fill="#E8EAED">Output</text>
             <text x="14" y="42" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">LLM 2 → resume text</text>
             <text x="14" y="56" font-family="JetBrains Mono" font-size="8" fill="#9CA3B5">LLM 3 → letter text</text>
           </g>
 
-          <!-- Arrows -->
-          <path d="M160 160 L208 155" stroke="#5C6273" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
-          <path d="M360 145 L418 65" stroke="#5C6273" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
-          <path d="M360 155 L418 175" stroke="#5C6273" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
-          <path d="M360 165 L418 275" stroke="#5C6273" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
-          <path d="M580 58 L658 150" stroke="#5C6273" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
-          <path d="M580 175 L658 170" stroke="#5C6273" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
-          <path d="M580 280 L658 195" stroke="#5C6273" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+          <!-- START → Doc Extractor (resume path) -->
+          <path d="M160 165 L208 158" stroke="#5FD9A4" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+
+          <!-- START → LLM 1 (job description path — direct, bypasses doc extractor) -->
+          <path d="M160 120 L418 62" stroke="#7C9EFF" stroke-width="1.2" stroke-dasharray="4 3" fill="none" marker-end="url(#arrowhead)"/>
+          <!-- label -->
+          <text x="270" y="80" font-family="JetBrains Mono" font-size="7" fill="#7C9EFF">Job_description</text>
+
+          <!-- START → LLM 3 (job description path direct) -->
+          <path d="M160 200 L418 295" stroke="#7C9EFF" stroke-width="1.2" stroke-dasharray="4 3" fill="none" marker-end="url(#arrowhead)"/>
+          <text x="225" y="268" font-family="JetBrains Mono" font-size="7" fill="#7C9EFF">Job_description</text>
+
+          <!-- Doc Extractor → LLM 2 -->
+          <path d="M360 155 L418 190" stroke="#5FD9A4" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+
+          <!-- Doc Extractor → LLM 3 -->
+          <path d="M360 175 L418 285" stroke="#5FD9A4" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+
+          <!-- LLM 1 → LLM 2 (keywords flow) -->
+          <path d="M500 98 L490 143" stroke="#7C9EFF" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+          <text x="502" y="125" font-family="JetBrains Mono" font-size="7" fill="#7C9EFF">keywords</text>
+
+          <!-- LLM 2 → Output -->
+          <path d="M585 190 L663 175" stroke="#5C6273" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+
+          <!-- LLM 3 → Output -->
+          <path d="M585 295 L663 205" stroke="#5C6273" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
         </svg>
       </div>
-      <div class="pipeline-caption">Redrawn from the deployed Dify workflow- Doc Extractor fans out to 3 chained LLM calls, converging at Output</div>
+      <div class="pipeline-caption">Redrawn from the deployed Dify workflow · solid lines = resume/text path · dashed lines = job description path · LLM 3 receives raw JD, not keyword list</div>
 
-      <p>The detail that took the most iteration: <strong>LLM 2 (resume rewrite) consumes the output of the keyword-extraction LLM</strong>, but <strong>LLM 3 (cover letter) does not</strong>- it reads the job description directly instead. That's deliberate, not an oversight: a resume benefits from dense, ATS-targeted keyword presence; a cover letter that's visibly keyword-stuffed reads as robotic to a human reader. Same job description, two different downstream needs, so the pipeline routes data differently for each.</p>
+      <p>The detail that took the most iteration: <strong>LLM 2 (resume rewrite) consumes both the Doc Extractor output and the keyword list from LLM 1</strong>, but <strong>LLM 3 (cover letter) bypasses LLM 1 entirely</strong> and reads the raw job description directly. That's deliberate, not an oversight: a resume benefits from dense, ATS-targeted keyword presence; a cover letter that's visibly keyword-stuffed reads as robotic to a human reader. Same job description, two different downstream needs, so the pipeline routes data differently for each.</p>
 
       <div class="callout mint">
         <b>Why a Doc Extractor node at all</b>
-        Resumes arrive as PDFs, Docx files, or pasted text- never clean structured data. The Doc Extractor node normalizes whatever comes in in into plain text before any LLM sees it, so the downstream prompts can assume consistent input rather than each handling file-parsing edge cases themselves.
+        Resumes arrive as PDFs, Docx files, or pasted text- never clean structured data. The Doc Extractor node normalizes whatever comes in into plain text before any LLM sees it, so the downstream prompts can assume consistent input rather than each handling file-parsing edge cases themselves.
       </div>
     </div>
 
@@ -394,7 +412,7 @@
 
       <div class="prompt-block">
         <div class="prompt-head">
-          <div class="prompt-head-left"><span class="prompt-dot blue"></span><span class="prompt-name">LLM · ATS Keyword Extractor</span></div>
+          <div class="prompt-head-left"><span class="prompt-dot blue"></span><span class="prompt-name">LLM 1 · ATS Keyword Extractor</span></div>
           <span class="prompt-model">Gemini 2.5 Flash</span>
         </div>
         <div class="prompt-body">You are an advanced Applicant Tracking System (ATS) parsing algorithm. Analyze the job description provided by the user. Extract exactly 10-12 technical hard skills and keywords mentioned. Format the output strictly as a comma-separated list. Do not include conversational filler.
@@ -445,7 +463,7 @@ EXECUTION RULES:
 
       <div class="callout">
         <b>The rule I'm most proud of</b>
-        Rule 1 in LLM 2 and Rule 1 in LLM 3 both explicitly forbid inventing metrics, companies, or experience. It would have been trivial to let the model "enhance" a thin resume with plausible-sounding fabrications- and early test runs without this constraint did exactly that. Writing the prompt to refuse fabrication, even when the honest output is less impressive, was a deliberate trade-off: a tailored resume that lies is worse than no tool at all.
+        Rule 1 in LLM 2 and Rule 1 in LLM 3 both explicitly forbid inventing metrics, companies, or experience. It would have been trivial to let the model "enhance" a thin resume with plausible-sounding fabrications- and early test runs without this constraint did exactly that. <strong>Writing the prompt to refuse fabrication, even when the honest output is less impressive, was a deliberate trade-off</strong>: a tailored resume that lies is worse than no tool at all.
       </div>
     </div>
 
@@ -453,7 +471,8 @@ EXECUTION RULES:
     <div class="panel" id="panel-product">
       <div class="panel-eyebrow">The product</div>
       <h2>What the user actually sees</h2>
-      <p>The Dify workflow sits behind a simple three-field interface built in Lovable: target role, current resume (paste or upload), and the target job description. One click runs the full pipeline and returns a tailored resume and cover letter side by side, ready to copy or download.</p>
+      <p>The Dify workflow sits behind a simple three-field interface built in Lovable: target role, current resume (paste or upload), and the target job description. One click runs the full pipeline and returns a tailored resume and cover letter side by side.</p>
+      <p>The output first appears as <strong>live-streaming text in the output interface</strong>, which the user can read and edit directly before doing anything with it. I built in <strong>manual editing functionality</strong> — the user can tweak wording, adjust bullets, or correct anything in the output panel itself before copying to clipboard or downloading the final document. This matters: the pipeline is a strong first draft, not a finished product, and giving users friction-free control over the last mile is what makes it actually usable.</p>
 
       <div class="screenshot-frame">
         <img src="resumatch-ui.png" alt="ResuMatch web interface showing three input fields- target role type, current resume, and target job description- alongside an empty results panel reading 'Your tailored application will appear here'">
@@ -477,13 +496,13 @@ EXECUTION RULES:
         <div class="j-step">
           <div class="j-num">3</div>
           <div class="j-content">
-            <h3>Tailored output, ready to use</h3>
-            <p>A rewritten resume and a custom cover letter appear together, formatted in clean Markdown, ready to copy or download.</p>
+            <h3>Edit, then export</h3>
+            <p>The tailored resume and cover letter stream into the output panel as text. <strong>The user can edit the output directly in the interface</strong> before copying to clipboard or downloading — giving full control over the final wording before it goes anywhere.</p>
           </div>
         </div>
       </div>
 
-      <p>Live at <a class="live-link" style="margin-top:0;" href="https://resumatch-resumegenerator.lovable.app/" target="_blank" rel="noopener">resumatch-resumegenerator.lovable.app ↗</a></p>
+      <p>Live at <a class="live-link" style="margin-top:0;display:inline-flex;" href="https://resumatch-resumegenerator.lovable.app/" target="_blank" rel="noopener">resumatch-resumegenerator.lovable.app ↗</a></p>
     </div>
 
     <!-- 05 CONSTRAINTS -->
@@ -494,10 +513,10 @@ EXECUTION RULES:
 
       <div class="callout coral">
         <b>Constraint → decision</b>
-        Using one fast, free-tier model for everything meant accepting a quality ceiling on the more nuanced writing tasks (the cover letter especially) in exchange for the pipeline being runnable end-to-end without a billing dependency. Each LLM node is also configured to retry up to 3 times on failure- a pragmatic guard against the rate-limiting and occasional instability that comes with free-tier API usage.
+        Using one fast, free-tier model for everything meant accepting a quality ceiling on the more nuanced writing tasks (the cover letter especially) in exchange for the pipeline being runnable end-to-end without a billing dependency. <strong>Each LLM node is configured to retry up to 3 times, with a 2-second interval between attempts.</strong> This is a pragmatic guard against two failure modes that come with free-tier API usage: transient rate-limit errors (where a short wait is enough to recover) and occasional model non-responses (where a fast retry is cheaper than surfacing an error to the user). Three attempts at 2s was the minimum that meaningfully reduced visible failures in testing without adding noticeable latency to a successful run.
       </div>
 
-      <p>The keyword-extraction step (LLM 1) is the cheapest, most deterministic task in the pipeline- strict comma-separated output, no creative writing- so it tolerates a smaller/faster model well. The resume and cover letter rewrites (LLM 2, LLM 3) are where model quality would matter most if this were scaled beyond a personal project.</p>
+      <p>The <strong>keyword-extraction step (LLM 1)</strong> is the cheapest, most deterministic task in the pipeline- strict comma-separated output, no creative writing- so it tolerates a smaller/faster model well. The <strong>resume and cover letter rewrites (LLM 2, LLM 3)</strong> are where model quality would matter most if this were scaled beyond a personal project.</p>
     </div>
 
     <!-- 06 IMPROVEMENTS -->
@@ -510,22 +529,22 @@ EXECUTION RULES:
         <div class="j-step">
           <div class="j-num">1</div>
           <div class="j-content">
-            <h3>Split models by task, not one model for all three</h3>
-            <p>I'd keep a fast/cheap model for the deterministic keyword-extraction step, but move the resume and cover letter rewrites to a stronger reasoning model- the writing quality gap matters most exactly where the task is least deterministic.</p>
+            <h3>Split models by task</h3>
+            <p>I'd keep <strong>Gemini 2.5 Flash</strong> (or something similarly fast and cheap, like <strong>GPT-4o mini</strong>) for the deterministic keyword-extraction step — it's a structured output task that doesn't need strong reasoning. For the resume rewrite (LLM 2) I'd move to <strong>Claude Sonnet</strong> or <strong>GPT-4o</strong>, which handle nuanced instruction-following and long-form writing quality significantly better. For the cover letter (LLM 3), where tone and persuasion matter most, I'd evaluate <strong>Claude Opus</strong> or <strong>Gemini 2.5 Pro</strong> — both show noticeably stronger voice and coherence on open-ended writing tasks in my testing.</p>
           </div>
         </div>
         <div class="j-step">
           <div class="j-num">2</div>
           <div class="j-content">
             <h3>Add a structured ATS-score output, not just keywords</h3>
-            <p>Right now LLM 1 outputs a keyword list. With more headroom, I'd have it return a structured match score against the JD plus a gap list- so the user sees not just the tailored output but why it changed.</p>
+            <p>Right now LLM 1 outputs a keyword list. With more headroom, I'd have it return a <strong>structured match score against the JD plus a gap list</strong>- so the user sees not just the tailored output but why it changed and what the original resume was missing.</p>
           </div>
         </div>
         <div class="j-step">
           <div class="j-num">3</div>
           <div class="j-content">
             <h3>Add a verification pass</h3>
-            <p>A fourth LLM call (or a deterministic check) that diffs the rewritten resume against the original to confirm no dates, employers, or metrics were altered- turning the "don't fabricate" prompt rule into something I can actually verify, not just instruct.</p>
+            <p>A fourth LLM call (or a deterministic diff check) that compares the rewritten resume against the original to <strong>confirm no dates, employers, or metrics were altered</strong>- turning the "don't fabricate" prompt rule into something verifiable, not just instructed.</p>
           </div>
         </div>
       </div>
@@ -536,15 +555,14 @@ EXECUTION RULES:
       <div class="panel-eyebrow">Reflections</div>
       <h2>What this taught me</h2>
       <p>The most useful lesson wasn't about prompt-writing technique- it was about <strong>data routing</strong>. Deciding that LLM 3 should see the raw job description instead of the keyword list LLM 1 produced was a small architectural choice with an outsized effect on output quality: it's the difference between a cover letter that reads like a person and one that reads like a keyword list wearing a trench coat.</p>
-      <p>I'd also flag the anti-fabrication rules as the part of this project I'd defend hardest in an interview. It's tempting to let an LLM "fill gaps" to make a thin resume look stronger, and a less careful prompt would do exactly that. Writing explicit constraints against fabricating companies, dates, or metrics- and testing that the model actually honors them- felt like the real product work here, more than the formatting or UI.</p>
-      <p>The biggest open question I'd want real user data on: does a fully automated three-LLM pipeline actually produce a <em>better</em> tailored resume than a careful human editing pass with AI assistance, or does it just produce a faster one? I built this to find out hands-on what a multi-agent chain can and can't do well- and the honest answer right now is that it's very good at structure and keyword alignment, and still needs a human's judgment on what to emphasize.</p>
+      <p>The biggest open question I'd want real user data on: does a fully automated three-LLM pipeline actually produce a <strong>better</strong> tailored resume than a careful human editing pass with AI assistance, or does it just produce a faster one? I built this to find out hands-on what a multi-agent chain can and can't do well- and the honest answer right now is that it's <strong>very good at structure and keyword alignment</strong>, and still needs a human's judgment on what to emphasize.</p>
     </div>
 
   </div>
 </div>
 
 <div class="case-foot-nav">
-  <a href="case-01.html">
+  <a href="case1.html">
     <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
     Previous case
   </a>
