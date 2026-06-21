@@ -573,37 +573,56 @@
       <p>💡 <strong>Key insight:</strong> the user isn't actually loyal to coupon-hunting- they're loyal to not feeling like they overpaid. If the app removes the need to leave and search, it doesn't lose the bargain-hunting behavior, it just relocates it to a moment the app controls.</p>
     </div>
 
-    <!-- 06 METRICS -->
-    <div class="panel" id="panel-metrics">
-      <div class="panel-eyebrow">Success metrics</div>
-      <h2>How I'd know it's working</h2>
-      <p><strong>North star:</strong> checkout completion rate among sessions where the QR offer was shown vs. a held-out control. Everything else is a supporting or guardrail metric underneath that.</p>
+<!-- 06 METRICS -->
+<div class="panel" id="panel-metrics">
+  <div class="panel-eyebrow">Success metrics</div>
+  <h2>How I'd know it's working</h2>
+  <p><strong>North star:</strong> checkout completion rate among sessions where the QR offer was shown vs. a held-out control. Everything else is a supporting or guardrail metric underneath that.</p>
+  <div class="stat-grid">
 
-      <div class="stat-grid">
-        <div class="stat-card">
-          <div class="stat-num">↑</div>
-          <div class="stat-label">Checkout completion rate, QR-shown vs. control</div>
-          <div class="stat-src">North star</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">↓</div>
-          <div class="stat-label">Off-app exits during checkout (tab switches / app backgrounding)</div>
-          <div class="stat-src">Leading indicator</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">→</div>
-          <div class="stat-label">Average discount cost per completed order</div>
-          <div class="stat-src">Counter-metric / guardrail</div>
-        </div>
+    <div class="stat-card">
+      <div class="stat-img-wrap">
+        <img
+          src="/assets/images/metrics-checkout-completion.png"
+          alt="Checkout completion rate illustration"
+          class="stat-img"
+        />
       </div>
-
-      <p>The counter-metric matters most here: it's easy to lift completion rate by simply giving away large discounts. The real test of this concept is whether it lifts completion <em>without</em> increasing average discount depth beyond what the team would already budget for promotions- i.e., is it making existing offers more effective, not just making offers bigger.</p>
-
-      <div class="callout">
-        <b>30 / 90 / 365-day view</b>
-        At 30 days: does the QR-shown cohort complete checkout at a meaningfully higher rate than control, holding order value constant? At 90 days: does that lift hold once the novelty of "a QR code at checkout" wears off, or does it decay toward baseline? At 365 days: has it changed user behavior upstream- fewer users opening a second tab at all, because they've learned the deal will show up in-app?
-      </div>
+      <div class="stat-label">Checkout completion rate, QR-shown vs. control</div>
+      <div class="stat-src">North star</div>
     </div>
+
+    <div class="stat-card">
+      <div class="stat-img-wrap">
+        <img
+          src="/assets/images/metrics-off-app-exits.png"
+          alt="Off-app exits during checkout illustration"
+          class="stat-img"
+        />
+      </div>
+      <div class="stat-label">Off-app exits during checkout (tab switches / app backgrounding)</div>
+      <div class="stat-src">Leading indicator</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-img-wrap">
+        <img
+          src="/assets/images/metrics-discount-cost.png"
+          alt="Average discount cost per completed order illustration"
+          class="stat-img"
+        />
+      </div>
+      <div class="stat-label">Average discount cost per completed order</div>
+      <div class="stat-src">Counter-metric / guardrail</div>
+    </div>
+
+  </div>
+  <p>The counter-metric matters most here: it's easy to lift completion rate by simply giving away large discounts. The real test of this concept is whether it lifts completion <em>without</em> increasing average discount depth beyond what the team would already budget for promotions- i.e., is it making existing offers more effective, not just making offers bigger.</p>
+  <div class="callout">
+    <b>30 / 90 / 365-day view</b>
+    At 30 days: does the QR-shown cohort complete checkout at a meaningfully higher rate than control, holding order value constant? At 90 days: does that lift hold once the novelty of "a QR code at checkout" wears off, or does it decay toward baseline? At 365 days: has it changed user behavior upstream- fewer users opening a second tab at all, because they've learned the deal will show up in-app?
+  </div>
+</div>
 
     <!-- 07 REFLECTIONS -->
     <div class="panel" id="panel-reflections">
