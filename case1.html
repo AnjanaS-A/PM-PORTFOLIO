@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Case 01 — QR-code Offers at Checkout · Anjana</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
 
   :root{
     --paper: #ECE8DF;
@@ -158,7 +158,7 @@
     color:var(--ink);
   }
   .callout.pin{ background:var(--pin-pale); border-left-color:var(--pin); }
-  .callout b{ font-family:'JetBrains Mono', monospace; font-size:0.78rem; text-transform:uppercase; display:block; margin-bottom:6px; letter-spacing:0.05em; }
+  .callout b{ font-family:'JetBrains Mono', monospace; font-size:0.78rem; text-transform:uppercase; display:block; margin-bottom:6px; letter-spacing:0.05em; font-weight:800; }
 
   .src{
     font-family:'JetBrains Mono', monospace;
@@ -203,9 +203,9 @@
     background:var(--card); border:1px solid var(--line); border-radius:6px;
     padding:22px 20px; margin:22px 0;
   }
-  .chart-title{ font-family:'JetBrains Mono', monospace; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--mute); margin-bottom:16px; }
+  .chart-title{ font-family:'JetBrains Mono', monospace; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--mute); margin-bottom:16px; font-weight:700; }
   .bar-row{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
-  .bar-label{ width:150px; font-size:0.8rem; color:var(--ink-soft); flex-shrink:0; }
+  .bar-label{ width:150px; font-size:0.8rem; color:var(--ink-soft); flex-shrink:0; font-weight:700; }
   .bar-track{ flex-grow:1; background:var(--paper-deep); border-radius:3px; height:20px; overflow:hidden; }
   .bar-fill{ height:100%; background:var(--teal); border-radius:3px; display:flex; align-items:center; justify-content:flex-end; padding-right:8px; transition:width 1s ease; }
   .bar-fill.pin{ background:var(--pin); }
@@ -221,7 +221,7 @@
     display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono', monospace;
     font-size:0.85rem; font-weight:600; flex-shrink:0; z-index:1;
   }
-  .j-content h3{ font-family:'Spectral', serif; font-weight:600; font-size:1.08rem; margin-bottom:6px; }
+  .j-content h3{ font-family:'Spectral', serif; font-weight:700; font-size:1.08rem; margin-bottom:6px; }
   .j-content p{ font-size:0.9rem; color:var(--ink-soft); margin-bottom:0; }
 
   .mockup-frame{
@@ -235,7 +235,7 @@
   .rice-table th{
     font-family:'JetBrains Mono', monospace; font-size:0.7rem; text-transform:uppercase;
     letter-spacing:0.04em; color:var(--mute); text-align:left; padding:8px 10px;
-    border-bottom:1.5px solid var(--ink);
+    border-bottom:1.5px solid var(--ink); font-weight:700;
   }
   .rice-table td{ padding:10px 10px; border-bottom:1px solid var(--line); color:var(--ink-soft); }
   .rice-table tr:last-child td{ font-weight:700; color:var(--ink); background:var(--teal-pale); }
@@ -506,7 +506,7 @@
       <p style="font-size:0.8rem; color:var(--mute); margin-top:-10px;">*Higher raw RICE scores for the lower-effort options- see note below on why I'd still sequence the QR concept first.</p>
 
       <div class="callout">
-        <b style="font-weight:800;">Why not just ship the highest RICE score</b>
+        <b>Why not just ship the highest RICE score</b>
         The banner and autofill ideas score well because they're cheap, not because they solve the deeper problem. They reduce friction for users who already know to look for a deal- they don't change the <strong>62% who currently leave the app to search</strong>. I'd treat them as quick wins to ship in parallel, and the QR concept as the bet that actually closes the discovery gap, sequenced as an MVP test on one high-traffic order flow before wider rollout.
       </div>
 
@@ -570,7 +570,7 @@
       <div class="mockup-caption">Proposed checkout screen- QR offer reveal above the pay button</div>
 
       <div class="callout">
-        <b style="font-weight:800;">PR/FAQ- if this shipped</b>
+        <b>PR/FAQ- if this shipped</b>
         "Starting today, your checkout screen shows a deal made for this order- scan it, tap it, done. No searching, no separate tab, no expired codes. Just open the app, order, and see what you've unlocked before you pay."
       </div>
 
@@ -606,7 +606,7 @@
       <p>The counter-metric matters most here: <strong>it's easy to lift completion rate by simply giving away large discounts.</strong> The real test of this concept is whether it lifts completion <em>without</em> increasing average discount depth beyond what the team would already budget for promotions- i.e., is it making existing offers more effective, not just making offers bigger.</p>
 
       <div class="callout">
-        <b style="font-weight:800;">30 / 90 / 365-day view</b>
+        <b>30 / 90 / 365-day view</b>
         <div style="margin-top:10px;">
           <strong style="display:block; margin-bottom:4px;">At 30 days</strong>
           <span>Does the QR-shown cohort complete checkout at a meaningfully higher rate than control, holding order value constant?</span>
