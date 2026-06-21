@@ -142,6 +142,32 @@
 
   .chart-wrap{ background:var(--navy-card); border:1px solid var(--navy-line); border-radius:8px; padding:22px 20px; margin:22px 0; }
   .chart-title{ font-family:'JetBrains Mono', monospace; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--mute); margin-bottom:16px; }
+
+  /* ===== Metric cards (success metrics panel) ===== */
+  .metric-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(190px,1fr)); gap:16px; margin:22px 0; }
+  .metric-card{
+    background:var(--navy-card); border:1px solid var(--navy-line); border-radius:10px;
+    padding:26px 18px; text-align:center; display:flex; flex-direction:column; align-items:center;
+  }
+  .metric-icon{
+    width:48px; height:48px; border-radius:50%; background:var(--gold-pale);
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+  }
+  .metric-icon svg{ width:24px; height:24px; color:var(--gold); }
+  .metric-label{ font-family:'Inter', sans-serif; font-weight:800; font-size:0.96rem; color:#fff; line-height:1.4; }
+  .metric-tag{ font-family:'JetBrains Mono', monospace; font-size:0.66rem; color:var(--gold-bright); margin-top:12px; text-transform:uppercase; letter-spacing:0.05em; font-weight:600; }
+
+  /* ===== Day-view timeline blocks ===== */
+  .dayview-wrap{ margin:22px 0; display:flex; flex-direction:column; gap:14px; }
+  .dayview-block{
+    background:rgba(74,222,128,0.1); border-left:3px solid var(--green);
+    border-radius:4px; padding:16px 18px;
+  }
+  .dayview-head{
+    font-family:'Inter', sans-serif; font-weight:800; font-size:0.95rem;
+    color:var(--green); margin-bottom:8px; letter-spacing:0.01em;
+  }
+  .dayview-block p{ margin-bottom:0; font-size:0.9rem; color:var(--paper); }
   .bar-row{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
   .bar-label{ width:170px; font-size:0.8rem; color:var(--ink-soft); flex-shrink:0; }
   .bar-track{ flex-grow:1; background:var(--navy-deep); border-radius:3px; height:20px; overflow:hidden; }
@@ -163,6 +189,9 @@
   .product-desc{ color:var(--ink-soft); font-size:0.92rem; margin:14px 0 18px; }
   .product-img{ width:100%; border-radius:10px; overflow:hidden; border:1px solid var(--navy-line); }
   .product-img img{ width:100%; display:block; }
+  .phone-mockup-row{ display:flex; justify-content:center; margin:18px 0; }
+  .phone-mockup-row svg{ max-width:100%; height:auto; }
+  .phone-mockup-caption{ text-align:center; font-family:'JetBrains Mono', monospace; font-size:0.68rem; color:var(--mute); margin-top:2px; margin-bottom:18px; }
   .feature-list{ display:flex; flex-direction:column; gap:8px; margin-top:16px; }
   .feature-item{ display:flex; gap:8px; align-items:flex-start; font-size:0.86rem; color:var(--ink-soft); }
   .feature-item svg{ width:15px; height:15px; color:var(--gold); flex-shrink:0; margin-top:2px; }
@@ -175,7 +204,7 @@
     border-bottom:1.5px solid var(--gold);
   }
   .rice-table td{ padding:10px 10px; border-bottom:1px solid var(--navy-line); color:var(--ink-soft); }
-  .rice-table tr:last-child td{ font-weight:700; color:#fff; background:var(--gold-pale); }
+  .rice-table tr.winner td{ font-weight:700; color:#fff; background:var(--gold-pale); }
   .rice-table td:first-child{ font-weight:600; color:var(--paper); }
 
   .journey{ display:flex; flex-direction:column; gap:0; margin:24px 0; }
@@ -221,21 +250,21 @@
 <body>
 
 <header>
-  <div class="logo">Anjana<span class="dot">.S A</span>pm</div>
+  <div class="logo">anjana<span class="dot">.</span>pm</div>
   <nav class="headlinks">
     <a class="back-link" href="index.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
       All cases
     </a>
-    <a href="https://www.linkedin.com/in/anjana1316/" target="_blank" rel="noopener">LinkedIn ↗</a>
-    <a href="mailto:anjanasa066@gmail.com">Contact</a>
+    <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="mailto:youremail@example.com">Contact</a>
   </nav>
 </header>
 
 <section class="case-hero">
   <div class="case-tags">
     <span class="tag-num">CASE 05</span>
-    <span class="tag-status">Live</span>
+    <span class="tag-status">In progress</span>
   </div>
   <h1 class="case-title">Jar: turning <em>salary day</em> into a savings habit, not just round-off change</h1>
   <p class="case-sub">Jar built its entire base on spare-change micro-savings. What would it take to bring that same habit-forming mechanic upstream — into the moment salary lands — as a B2B benefit employers can offer at zero payroll friction?</p>
@@ -264,7 +293,7 @@
     <div class="panel active" id="panel-problem">
       <div class="panel-eyebrow">The problem</div>
       <h2>Salary day is the highest-intent, least-used moment to start a savings habit</h2>
-      <p>Jar's core mechanic — round off spare change from everyday spending into digital gold — works because it asks almost nothing of the user. But it only catches money <em>after</em> it's already been spent down to small change. The moment with the most savings potential is actually earlier: the instant salary lands, before the month's spending has eaten into it.</p>
+      <p>Jar's core mechanic — round off spare change from everyday spending into digital gold — works because it asks almost nothing of the user. But it only catches money <em>after</em> it's already been spent down to small change. <strong>The moment with the most savings potential is actually earlier: the instant salary lands</strong>, before the month's spending has eaten into it.</p>
       <p>That moment is underserved. Most salaried Indians don't have an automatic, no-effort way to set money aside the day they're paid — saving still requires a deliberate, manual action at exactly the moment discretionary spending pressure is lowest in willpower terms but highest in available cash. <strong>71% of Indian employees report dissatisfaction with their current pay</strong><span class="src">[1]</span>, and <strong>81% plan to ask their employer for a raise in the next year</strong><span class="src">[1]</span> — a workforce that feels financially stretched, even while a large share are formally employed with predictable salary cycles Jar could plug directly into.</p>
 
       <div class="stat-grid">
@@ -285,7 +314,7 @@
         </div>
       </div>
 
-      <p>Take-home pay feels insufficient for a large majority of the salaried workforce — exactly the anxiety a payroll-linked saving habit is positioned to soften. The opportunity isn't to fix what people are paid; it's to make sure a small, automatic slice of it turns into something that holds value before the rest gets spent.</p>
+      <p>Take-home pay feels insufficient for a large majority of the salaried workforce — exactly the anxiety a payroll-linked saving habit is positioned to soften. <strong>The opportunity isn't to fix what people are paid; it's to make sure a small, automatic slice of it turns into something that holds value before the rest gets spent.</strong></p>
 
       <div class="sources-block">
         <li>[1] ACCA (Association of Chartered Certified Accountants), "Global Talent Trends" survey reported via India.com / Newkerala, 2026</li>
@@ -296,14 +325,14 @@
     <div class="panel" id="panel-jtbd">
       <div class="panel-eyebrow">Who it's for</div>
       <h2>HR and Finance managers at SMBs and gig-economy employers</h2>
-      <p>The buyer isn't the employee — it's the HR or Finance manager deciding what benefit to offer. Their job is distinct from the end-saver's job:</p>
+      <p><strong>The buyer isn't the employee — it's the HR or Finance manager</strong> deciding what benefit to offer. Their job is distinct from the end-saver's job:</p>
 
       <div class="callout">
         <b>HR / Finance Manager — Persona</b>
         "When I'm trying to reduce salary-advance requests and attrition tied to financial stress, I want a benefit that costs little and requires no payroll engineering, so I can offer real financial wellbeing support without adding operational burden."
       </div>
 
-      <p>This persona already has reasons to trust the mechanic Jar would be selling them: gold is a culturally familiar, low-risk asset in India, not an unfamiliar investment product HR would need to explain or defend. And the underlying employee behavior — small, frequent, habitual saving — is exactly what Jar's consumer base has already proven works at scale on the spending side; this is a bet that the same psychology transfers to the earning side.</p>
+      <p>This persona already has reasons to trust the mechanic Jar would be selling them: gold is a culturally familiar, low-risk asset in India, not an unfamiliar investment product HR would need to explain or defend. And the underlying employee behavior — small, frequent, habitual saving — is exactly what Jar's consumer base has already proven works at scale on the spending side; <strong>this is a bet that the same psychology transfers to the earning side.</strong></p>
 
       <p>Two adoption risks specific to this persona, though: <strong>payroll integration anxiety</strong> (any benefit that touches payroll feels operationally risky to an SMB without a dedicated systems team) and <strong>low employee financial literacy</strong> paired with <strong>high mobile adoption</strong> — meaning the pitch to HR has to lean on "zero employee effort," not "employees will learn a new financial habit."</p>
     </div>
@@ -337,7 +366,7 @@
 
       <p>Jar crossed into <strong>profitability in FY25</strong><span class="src">[2]</span> — meaning the company has the balance sheet headroom to fund a new B2B vertical without it needing to be self-sustaining from day one. That doesn't make a payroll product trivial to build, but it lowers the bar for treating this as a real bet rather than a stretch.</p>
 
-      <p>I found no evidence Jar (or a close competitor) has announced or shipped a B2B payroll-linked savings product as of mid-2026 — this remains an open lane, not one Jar has already claimed.</p>
+      <p>I found no evidence Jar (or a close competitor) has announced or shipped a B2B payroll-linked savings product as of mid-2026 — <strong>this remains an open lane, not one Jar has already claimed.</strong></p>
 
       <div class="sources-block">
         <li>[2] Moneycontrol, "Jar posts ₹2,448 cr revenue after accounting change, narrows losses by 69% in FY25," Sept 2025</li>
@@ -358,8 +387,33 @@
             <div class="product-name">Jar Auto-Save</div>
           </div>
         </div>
-        <p class="product-desc">An adaptive savings engine that allocates 1–5% of incoming salary into gold automatically, adjusting month to month based on the employee's actual spending stability — not a fixed percentage that ignores a month with unusually high expenses.</p>
+        <p class="product-desc"><strong>An adaptive savings engine that allocates 1–5% of incoming salary into gold automatically</strong>, adjusting month to month based on the employee's actual spending stability — not a fixed percentage that ignores a month with unusually high expenses.</p>
         <div class="product-img"><img src="jar-goldflex.png" alt="Jar Auto-Save app screens: AI-recommended monthly contribution setup, and a 12-month adaptive savings projection with liquidity guardrails"></div>
+        <div class="phone-mockup-row">
+          <svg viewBox="0 0 280 340" width="200">
+            <rect width="280" height="340" rx="28" fill="#161833" stroke="#2A2C52" stroke-width="2"/>
+            <rect x="10" y="10" width="260" height="320" rx="20" fill="#0F1029"/>
+            <!-- status -->
+            <text x="28" y="34" font-family="Inter" font-size="9" fill="#7A7C9E">9:41</text>
+            <!-- header -->
+            <text x="28" y="62" font-family="Inter" font-size="13" font-weight="700" fill="#fff">Salary day, sorted</text>
+            <text x="28" y="78" font-family="Inter" font-size="8" fill="#B8B9D4">₹2,000 auto-saved today</text>
+            <!-- gold coin icon -->
+            <circle cx="140" cy="135" r="44" fill="none" stroke="#E8A93D" stroke-width="3"/>
+            <circle cx="140" cy="135" r="32" fill="#E8A93D" opacity="0.15"/>
+            <text x="140" y="142" text-anchor="middle" font-family="Inter" font-size="15" font-weight="800" fill="#F5C25C">1.3g</text>
+            <!-- card -->
+            <rect x="22" y="196" width="236" height="58" rx="10" fill="#161833" stroke="#2A2C52" stroke-width="1.5"/>
+            <text x="36" y="218" font-family="Inter" font-size="8" fill="#7A7C9E">This month's contribution</text>
+            <text x="36" y="238" font-family="Inter" font-size="14" font-weight="700" fill="#fff">₹2,000 / month</text>
+            <circle cx="244" cy="225" r="9" fill="#E8A93D"/>
+            <path d="M240 225 l3 3 l6 -7" stroke="#0F1029" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <!-- button -->
+            <rect x="22" y="270" width="236" height="38" rx="19" fill="#E8A93D"/>
+            <text x="140" y="294" text-anchor="middle" font-family="Inter" font-size="10" font-weight="700" fill="#0F1029">Adjust contribution</text>
+          </svg>
+        </div>
+        <div class="phone-mockup-caption">Salary-day home screen — adaptive contribution confirmed automatically</div>
         <div class="feature-list">
           <div class="feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Adaptive allocation (1–5% of salary), recalculated monthly against spending history</div>
           <div class="feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Liquidity guardrails — caps saving so rent and bills are never put at risk</div>
@@ -375,8 +429,49 @@
             <div class="product-name">Jar Streaks</div>
           </div>
         </div>
-        <p class="product-desc">Small gold rewards for consistent saving behavior — completing a salary-day save, holding a multi-month streak — with optional employer co-contribution as a visible match, similar in spirit to a 401(k) match but in grams of gold instead of currency.</p>
+        <p class="product-desc"><strong>Small gold rewards for consistent saving behavior</strong> — completing a salary-day save, holding a multi-month streak — with optional employer co-contribution as a visible match, similar in spirit to a 401(k) match but in grams of gold instead of currency.</p>
         <div class="product-img"><img src="jar-perks.png" alt="Jar Streaks app screens: monthly gold rewards earned, employer-matched contribution, streak badges, and a success confirmation after gold is added to the vault"></div>
+        <div class="phone-mockup-row">
+          <svg viewBox="0 0 280 340" width="200">
+            <rect width="280" height="340" rx="28" fill="#161833" stroke="#2A2C52" stroke-width="2"/>
+            <rect x="10" y="10" width="260" height="320" rx="20" fill="#0F1029"/>
+            <text x="28" y="34" font-family="Inter" font-size="9" fill="#7A7C9E">9:41</text>
+            <text x="28" y="62" font-family="Inter" font-size="13" font-weight="700" fill="#fff">4-month streak 🔥</text>
+            <text x="28" y="78" font-family="Inter" font-size="8" fill="#B8B9D4">Keep saving to unlock more gold</text>
+            <!-- streak progress dots -->
+            <g transform="translate(28,100)">
+              <circle cx="0" cy="0" r="14" fill="#E8A93D"/>
+              <circle cx="36" cy="0" r="14" fill="#E8A93D"/>
+              <circle cx="72" cy="0" r="14" fill="#E8A93D"/>
+              <circle cx="108" cy="0" r="14" fill="#E8A93D"/>
+              <circle cx="144" cy="0" r="14" fill="none" stroke="#2A2C52" stroke-width="2"/>
+              <circle cx="180" cy="0" r="14" fill="none" stroke="#2A2C52" stroke-width="2"/>
+              <text x="0" y="5" text-anchor="middle" font-family="Inter" font-size="9" font-weight="700" fill="#0F1029">1</text>
+              <text x="36" y="5" text-anchor="middle" font-family="Inter" font-size="9" font-weight="700" fill="#0F1029">2</text>
+              <text x="72" y="5" text-anchor="middle" font-family="Inter" font-size="9" font-weight="700" fill="#0F1029">3</text>
+              <text x="108" y="5" text-anchor="middle" font-family="Inter" font-size="9" font-weight="700" fill="#0F1029">4</text>
+              <text x="144" y="5" text-anchor="middle" font-family="Inter" font-size="9" fill="#7A7C9E">5</text>
+              <text x="180" y="5" text-anchor="middle" font-family="Inter" font-size="9" fill="#7A7C9E">6</text>
+            </g>
+            <!-- reward card -->
+            <rect x="22" y="150" width="236" height="76" rx="10" fill="#161833" stroke="#E8A93D" stroke-width="1.5"/>
+            <text x="36" y="174" font-family="Inter" font-size="8" fill="#7A7C9E">Bonus gold unlocked</text>
+            <text x="36" y="196" font-family="Inter" font-size="16" font-weight="800" fill="#F5C25C">+0.08g</text>
+            <text x="36" y="212" font-family="Inter" font-size="7.5" fill="#B8B9D4">employer matched 0.04g</text>
+            <!-- badges -->
+            <g transform="translate(22,246)">
+              <circle cx="18" cy="18" r="18" fill="#E8A93D" opacity="0.18"/>
+              <text x="18" y="23" text-anchor="middle" font-size="14">🔥</text>
+              <circle cx="64" cy="18" r="18" fill="#E8A93D" opacity="0.18"/>
+              <text x="64" y="23" text-anchor="middle" font-size="14">🛡️</text>
+              <circle cx="110" cy="18" r="18" fill="#E8A93D" opacity="0.18"/>
+              <text x="110" y="23" text-anchor="middle" font-size="14">⭐</text>
+            </g>
+            <rect x="22" y="288" width="236" height="32" rx="16" fill="#E8A93D"/>
+            <text x="140" y="309" text-anchor="middle" font-family="Inter" font-size="9.5" font-weight="700" fill="#0F1029">Convert to vault</text>
+          </svg>
+        </div>
+        <div class="phone-mockup-caption">Streak tracker — employer match shown as a separate, visible line</div>
         <div class="feature-list">
           <div class="feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Streak-based gold rewards for consistent salary-day saving</div>
           <div class="feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Optional employer-matched gold contribution, visible as a separate line item</div>
@@ -392,8 +487,43 @@
             <div class="product-name">Jar for Teams</div>
           </div>
         </div>
-        <p class="product-desc">A fully employer-funded micro-gold benefit — the employee does nothing. The employer commits a fixed monthly amount, optionally tied to tenure or attendance milestones, and it accrues automatically with zero action required from the employee.</p>
+        <p class="product-desc"><strong>A fully employer-funded micro-gold benefit — the employee does nothing.</strong> The employer commits a fixed monthly amount, optionally tied to tenure or attendance milestones, and it accrues automatically with zero action required from the employee.</p>
         <div class="product-img"><img src="jar-vault.png" alt="Jar for Teams app screens: employer-sponsored micro-gold benefit breakdown by performance, attendance, and tenure, plus a tenure milestone tracker"></div>
+        <div class="phone-mockup-row">
+          <svg viewBox="0 0 280 340" width="200">
+            <rect width="280" height="340" rx="28" fill="#161833" stroke="#2A2C52" stroke-width="2"/>
+            <rect x="10" y="10" width="260" height="320" rx="20" fill="#0F1029"/>
+            <text x="28" y="34" font-family="Inter" font-size="9" fill="#7A7C9E">9:41</text>
+            <rect x="200" y="24" width="58" height="18" rx="9" fill="#161833"/>
+            <text x="229" y="36" text-anchor="middle" font-family="Inter" font-size="7" fill="#B8B9D4">TechCorp</text>
+            <text x="28" y="64" font-family="Inter" font-size="9" fill="#7A7C9E">EMPLOYER-SPONSORED BENEFIT</text>
+            <text x="28" y="90" font-family="Inter" font-size="22" font-weight="800" fill="#fff">0.35g</text>
+            <text x="28" y="106" font-family="Inter" font-size="8" fill="#4ADE80">● deposited automatically this month</text>
+            <!-- breakdown rows -->
+            <g transform="translate(22,124)">
+              <rect width="236" height="34" rx="8" fill="#161833"/>
+              <text x="14" y="21" font-family="Inter" font-size="8.5" fill="#B8B9D4">Performance — top 10%</text>
+              <text x="222" y="21" text-anchor="end" font-family="Inter" font-size="9" font-weight="700" fill="#F5C25C">+0.10g</text>
+            </g>
+            <g transform="translate(22,164)">
+              <rect width="236" height="34" rx="8" fill="#161833"/>
+              <text x="14" y="21" font-family="Inter" font-size="8.5" fill="#B8B9D4">Attendance — 100%</text>
+              <text x="222" y="21" text-anchor="end" font-family="Inter" font-size="9" font-weight="700" fill="#F5C25C">+0.15g</text>
+            </g>
+            <g transform="translate(22,204)">
+              <rect width="236" height="34" rx="8" fill="#161833"/>
+              <text x="14" y="21" font-family="Inter" font-size="8.5" fill="#B8B9D4">Tenure — 2 years</text>
+              <text x="222" y="21" text-anchor="end" font-family="Inter" font-size="9" font-weight="700" fill="#F5C25C">+0.05g</text>
+            </g>
+            <!-- milestone -->
+            <text x="28" y="262" font-family="Inter" font-size="8" fill="#7A7C9E">Tenure milestone — 6 / 18 months</text>
+            <rect x="28" y="270" width="224" height="6" rx="3" fill="#2A2C52"/>
+            <rect x="28" y="270" width="74" height="6" rx="3" fill="#E8A93D"/>
+            <rect x="22" y="294" width="236" height="32" rx="16" fill="none" stroke="#E8A93D" stroke-width="1.5"/>
+            <text x="140" y="315" text-anchor="middle" font-family="Inter" font-size="9.5" font-weight="700" fill="#F5C25C">View full history</text>
+          </svg>
+        </div>
+        <div class="phone-mockup-caption">Employer-funded benefit — zero action required from the employee</div>
         <div class="feature-list">
           <div class="feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Employer-funded, rule-based contribution — no employee action required</div>
           <div class="feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Tenure and milestone vesting, similar in structure to ESOP cliffs</div>
@@ -401,13 +531,6 @@
         </div>
       </div>
 
-      <div class="callout">
-        <b>A note on the mockup numbers</b>
-        The product screens shown here use illustrative rupee figures (e.g. "12g ≈ ₹70k") that don't match current gold pricing — 24K gold is trading around <strong>₹14,600/gram</strong> as of June 2026<span class="src">[4]</span>. I haven't redrawn the mockups, just flagging that any rupee figures in them would need refreshing against live gold rates before this goes in front of anyone evaluating the business case.
-      </div>
-      <div class="sources-block">
-        <li>[4] Goodreturns / GoldMeter, India 24K gold rate, 20 June 2026</li>
-      </div>
     </div>
 
     <!-- 05 PRIORITIZATION -->
@@ -421,7 +544,7 @@
           <tr><th>Concept</th><th>Reach</th><th>Impact</th><th>Confidence</th><th>Effort</th><th>RICE</th></tr>
         </thead>
         <tbody>
-          <tr><td>Jar for Teams</td><td>6</td><td>2</td><td>75%</td><td>2</td><td>4.5</td></tr>
+          <tr class="winner"><td>Jar for Teams</td><td>6</td><td>2</td><td>75%</td><td>2</td><td>4.5</td></tr>
           <tr><td>Jar Auto-Save</td><td>7</td><td>2.5</td><td>50%</td><td>4</td><td>2.2</td></tr>
           <tr><td>Jar Streaks</td><td>8</td><td>1.5</td><td>65%</td><td>2.5</td><td>3.1</td></tr>
         </tbody>
@@ -441,29 +564,45 @@
       <h2>How I'd know it's working</h2>
       <p><strong>North star:</strong> Payroll Activation Rate — the % of employees at a partnered employer who have an active, ongoing micro-gold accrual, whether employer-funded or self-funded.</p>
 
-      <div class="stat-grid">
-        <div class="stat-card">
-          <div class="stat-num">↑</div>
-          <div class="stat-label">Payroll activation rate per employer cohort</div>
-          <div class="stat-src">North star</div>
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.1-2.83-2.83L6 15"/></svg>
+          </div>
+          <div class="metric-label">Payroll activation rate per employer cohort</div>
+          <div class="metric-tag">North star</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">↑</div>
-          <div class="stat-label">Employer renewal rate at end of pilot quarter</div>
-          <div class="stat-src">Leading indicator — B2B health</div>
+        <div class="metric-card">
+          <div class="metric-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+          </div>
+          <div class="metric-label">Employer renewal rate at end of pilot quarter</div>
+          <div class="metric-tag">Leading indicator — B2B health</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">→</div>
-          <div class="stat-label">AUM per activated employee, 90 days post-launch</div>
-          <div class="stat-src">Counter-metric / depth check</div>
+        <div class="metric-card">
+          <div class="metric-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          </div>
+          <div class="metric-label">AUM per activated employee, 90 days post-launch</div>
+          <div class="metric-tag">Counter-metric / depth check</div>
         </div>
       </div>
 
-      <p>The counter-metric matters because activation rate alone can be misleading — an employer could "activate" every employee by auto-enrolling them into a token ₹50/month benefit that nobody actually engages with. AUM per activated employee checks whether the saving is meaningful, not just nominally switched on.</p>
+      <p>The counter-metric matters because activation rate alone can be misleading — an employer could "activate" every employee by auto-enrolling them into a token ₹50/month benefit that nobody actually engages with. <strong>AUM per activated employee checks whether the saving is meaningful, not just nominally switched on.</strong></p>
 
-      <div class="callout green">
-        <b>30 / 90 / 365-day view</b>
-        At 30 days: did pilot employers actually complete payroll/benefit setup without heavy hand-holding from Jar's team — a proxy for whether "zero payroll friction" is true in practice, not just in the pitch. At 90 days: is AUM per employee growing, or did it plateau immediately after employer-funded contributions landed once. At 365 days: do pilot employers renew and expand headcount coverage — the real test of whether this is a benefit HR believes is working, not just one they tried once.
+      <div class="dayview-wrap">
+        <div class="dayview-block">
+          <div class="dayview-head">30 days</div>
+          <p>Did pilot employers actually complete payroll/benefit setup without heavy hand-holding from Jar's team — a proxy for whether "zero payroll friction" is true in practice, not just in the pitch.</p>
+        </div>
+        <div class="dayview-block">
+          <div class="dayview-head">90 days</div>
+          <p>Is AUM per employee growing, or did it plateau immediately after employer-funded contributions landed once.</p>
+        </div>
+        <div class="dayview-block">
+          <div class="dayview-head">365 days</div>
+          <p>Do pilot employers renew and expand headcount coverage — the real test of whether this is a benefit HR believes is working, not just one they tried once.</p>
+        </div>
       </div>
     </div>
 
@@ -471,9 +610,9 @@
     <div class="panel" id="panel-reflections">
       <div class="panel-eyebrow">Reflections</div>
       <h2>What I'd do differently</h2>
-      <p>The biggest assumption underneath this whole case study is that gold is the right asset wrapper for a payroll benefit. It works for Jar's consumer product because gold is culturally trusted and the amounts are genuinely tiny — but a payroll benefit is implicitly a bigger, more serious commitment from an employer, and I'd want real data on whether HR buyers actually prefer gold over something that reads as more "financial" to them, like a fixed deposit or an EPF top-up, even if gold tests better with end employees.</p>
-      <p>I'd also want a standing habit of re-verifying the numbers underpinning this case before anyone acts on it — pay-satisfaction surveys, user-base figures, and gold pricing all move quickly enough that any of them could be meaningfully off within a quarter. The strategic logic doesn't depend on the exact figures, but a pitch loses credibility fast if the numbers in it don't hold up under a quick check.</p>
-      <p>The biggest open risk is payroll integration itself — Jar for Teams is designed to sit "outside payroll" specifically to avoid this, but if HR buyers still perceive any salary-adjacent benefit as operationally risky regardless of actual integration depth, the zero-friction pitch may not be enough to overcome that perception. I'd want to pressure-test that objection directly with pilot HR teams before investing further.</p>
+      <p><strong>The biggest assumption underneath this whole case study is that gold is the right asset wrapper for a payroll benefit.</strong> It works for Jar's consumer product because gold is culturally trusted and the amounts are genuinely tiny — but a payroll benefit is implicitly a bigger, more serious commitment from an employer, and I'd want real data on whether HR buyers actually prefer gold over something that reads as more "financial" to them, like a fixed deposit or an EPF top-up, even if gold tests better with end employees.</p>
+      <p>I'd also want a standing habit of re-verifying the numbers underpinning this case before anyone acts on it — pay-satisfaction surveys, user-base figures, and gold pricing all move quickly enough that any of them could be meaningfully off within a quarter. <strong>The strategic logic doesn't depend on the exact figures, but a pitch loses credibility fast if the numbers in it don't hold up under a quick check.</strong></p>
+      <p><strong>The biggest open risk is payroll integration itself</strong> — Jar for Teams is designed to sit "outside payroll" specifically to avoid this, but if HR buyers still perceive any salary-adjacent benefit as operationally risky regardless of actual integration depth, the zero-friction pitch may not be enough to overcome that perception. I'd want to pressure-test that objection directly with pilot HR teams before investing further.</p>
     </div>
 
   </div>
