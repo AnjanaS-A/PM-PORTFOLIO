@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anjana — PM Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --paper: #ECE8DF;
+    --paper-deep: #E2DDD1;
+    --ink: #1F2421;
+    --ink-soft: #3D453F;
+    --teal: #0E7C7B;
+    --teal-deep: #095C5B;
+    --pin: #C4592F;
+    --mute: #8A8579;
+    --line: #C9C2B2;
+    --card: #F6F3EC;
+    --shadow: rgba(31,36,33,0.14);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(31,36,33,0.045) 1px, transparent 0);
+    background-size: 22px 22px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .mono{ font-family:'JetBrains Mono', monospace; }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ===== Header ===== */
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:28px clamp(20px,5vw,64px) 18px;
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:'Spectral', serif;
+    font-weight:700;
+    font-size:1.15rem;
+    letter-spacing:0.01em;
+  }
+  .logo .dot{ color:var(--pin); }
+  nav.headlinks{ display:flex; gap:28px; align-items:center; }
+  nav.headlinks a{
+    font-size:0.85rem;
+    font-weight:600;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    transition:border-color .2s ease, color .2s ease;
+    padding-bottom:2px;
+  }
+  nav.headlinks a:hover{ color:var(--pin); border-color:var(--pin); }
+
+  /* ===== Hero ===== */
+  .hero{
+    padding:clamp(40px,7vw,84px) clamp(20px,5vw,64px) clamp(32px,5vw,56px);
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--teal-deep);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:18px; height:1px;
+    background:var(--teal-deep);
+    display:inline-block;
+  }
+  h1{
+    font-family:'Spectral', serif;
+    font-weight:600;
+    font-size:clamp(2.1rem, 5vw, 3.6rem);
+    line-height:1.08;
+    max-width:16ch;
+    letter-spacing:-0.01em;
+  }
+  h1 em{
+    font-style:italic;
+    color:var(--teal);
+  }
+  .hero-sub{
+    margin-top:22px;
+    max-width:54ch;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+  }
+  .hero-meta{
+    margin-top:32px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 12px;
+    font-size:0.82rem;
+  }
+  .chip{
+    font-family:'JetBrains Mono', monospace;
+    border:1px solid var(--line);
+    background:var(--card);
+    padding:6px 12px;
+    border-radius:3px;
+    color:var(--ink-soft);
+  }
+
+  /* ===== Filter strip ===== */
+  .filter-strip{
+    padding:0 clamp(20px,5vw,64px) 18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    border-bottom:1px dashed var(--line);
+    padding-bottom:26px;
+    margin:0 clamp(20px,5vw,64px) 8px;
+  }
+  .filter-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    color:var(--mute);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-right:6px;
+  }
+  .fw-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    padding:6px 11px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:transparent;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:all .18s ease;
+  }
+  .fw-tag:hover{ border-color:var(--teal); color:var(--teal-deep); }
+  .fw-tag.active{
+    background:var(--ink);
+    border-color:var(--ink);
+    color:var(--paper);
+  }
+  .fw-tag.active.pin{
+    background:var(--pin);
+    border-color:var(--pin);
+  }
+
+  /* ===== Case grid ===== */
+  .case-section{ padding:8px clamp(20px,5vw,64px) 90px; }
+  .case-grid{
+    margin-top:28px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(290px, 1fr));
+    gap:26px;
+  }
+
+  .card{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:24px 22px 22px;
+    display:flex;
+    flex-direction:column;
+    min-height:300px;
+    cursor:pointer;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    opacity:1;
+  }
+  .card::before{
+    /* tab */
+    content:attr(data-num);
+    position:absolute;
+    top:-13px; left:20px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    font-weight:600;
+    background:var(--ink);
+    color:var(--paper);
+    padding:4px 9px 3px;
+    border-radius:3px;
+    letter-spacing:0.03em;
+  }
+  .card:hover{
+    transform:translateY(-5px) rotate(-0.3deg);
+    box-shadow:0 18px 30px -10px var(--shadow);
+    border-color:var(--teal);
+  }
+  .card.dimmed{ opacity:0.32; filter:grayscale(0.4); }
+
+  .stamp{
+    position:absolute;
+    top:18px; right:16px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.65rem;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:4px 9px;
+    border-radius:3px;
+    transform:rotate(4deg);
+    border:1.5px solid currentColor;
+  }
+  .stamp.live{ color:var(--teal-deep); }
+  .stamp.progress{ color:var(--mute); border-style:dashed; }
+
+  .card-cover{
+    margin-top:22px;
+    border-radius:4px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--paper-deep);
+    aspect-ratio:16/10;
+  }
+  .card-cover svg{ width:100%; height:100%; display:block; }
+
+  .card-title{
+    font-family:'Spectral', serif;
+    font-weight:600;
+    font-size:1.18rem;
+    line-height:1.25;
+    margin-top:18px;
+  }
+  .card-q{
+    margin-top:10px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    flex-grow:1;
+  }
+  .card-foot{
+    margin-top:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .fw-tags{ display:flex; gap:6px; flex-wrap:wrap; }
+  .fw-pill{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.66rem;
+    padding:3px 8px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--mute);
+  }
+  .read-link{
+    font-size:0.82rem;
+    font-weight:700;
+    color:var(--teal-deep);
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:4px;
+  }
+  .card:hover .read-link{ color:var(--pin); }
+  .read-link svg{ width:13px; height:13px; transition:transform .2s ease; }
+  .card:hover .read-link svg{ transform:translateX(3px); }
+
+  /* ===== Footer ===== */
+  footer{
+    border-top:1px solid var(--line);
+    padding:26px clamp(20px,5vw,64px) 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:0.82rem;
+    color:var(--mute);
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media (max-width:560px){
+    header{ flex-direction:column; align-items:flex-start; gap:14px; }
+    nav.headlinks{ gap:18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior:auto !important; transition:none !important; }
+  }
+
+  :focus-visible{ outline:2px solid var(--pin); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">anjana<span class="dot">.</span>pm</div>
+  <nav class="headlinks">
+    <a href="#cases">Case studies</a>
+    <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="mailto:youremail@example.com">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Product case studies · India</div>
+  <h1>How I'd build it — <em>five reads</em> on Indian apps & e-commerce</h1>
+  <p class="hero-sub">Each case starts with one question I had as a user, then works through it the way I'd pitch it as a PM — problem framing, data, prioritization, and what I'd ship next.</p>
+  <div class="hero-meta">
+    <span class="chip">B.Tech Civil Engg · Management Minor, IIT Gandhinagar</span>
+    <span class="chip">Bengaluru</span>
+    <span class="chip">youremail@example.com</span>
+  </div>
+</section>
+
+<div class="filter-strip" id="filterStrip">
+  <span class="filter-label">Filter by framework</span>
+  <!-- JS injects framework tags here -->
+</div>
+
+<section class="case-section" id="cases">
+  <div class="case-grid" id="caseGrid"></div>
+</section>
+
+<footer>
+  <span>Bengaluru · 2026</span>
+  <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+</footer>
+
+<script>
+const cases = [
+  {
+    num: "01",
+    status: "live",
+    title: "Live QR-code offers at checkout: a discovery problem in app-based ordering",
+    q: "Why don't users see restaurant offers until they've already decided what to order — and what would change if they did?",
+    frameworks: ["JTBD","RICE","PR/FAQ"],
+    href: "case-01.html",
+    coverColor: "#0E7C7B",
+    coverMotif: "qr"
+  },
+  {
+    num: "02",
+    status: "progress",
+    title: "A resume generator that actually reads the job description",
+    q: "Most resume tools rewrite tone, not substance — what would it take to tailor a CV and cover letter to what a specific JD is actually asking for?",
+    frameworks: ["JTBD","PR/FAQ","MoSCoW"],
+    href: "case-02.html",
+    coverColor: "#C4592F",
+    coverMotif: "doc"
+  },
+  {
+    num: "03",
+    status: "progress",
+    title: "A fitness app that explains the \"why\" to first-timers",
+    q: "Beginners don't lack exercise data — they lack a reason to trust it. What does a BMI- and goal-aware workout plan look like when it's built on verified sources?",
+    frameworks: ["Kano","North Star","A/B Testing"],
+    href: "case-03.html",
+    coverColor: "#3D453F",
+    coverMotif: "pulse"
+  },
+  {
+    num: "04",
+    status: "progress",
+    title: "Navi: lending made to feel like a utility, not a loan",
+    q: "Navi strips lending down to its simplest form — what's the product bet behind that simplicity, and where does it start to cost them?",
+    frameworks: ["AARRR","Double Diamond"],
+    href: "case-04.html",
+    coverColor: "#0E7C7B",
+    coverMotif: "funnel"
+  },
+  {
+    num: "05",
+    status: "progress",
+    title: "Jar: turning round-off change into a savings habit",
+    q: "Jar bets that micro-savings can become a daily habit — what does the activation and retention loop need to look like for that bet to pay off?",
+    frameworks: ["Hook Model","OKRs"],
+    href: "case-05.html",
+    coverColor: "#C4592F",
+    coverMotif: "coin"
+  }
+];
+
+function svgCover(c){
+  const base = `<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="250" fill="${c.coverColor}" opacity="0.07"/>`;
+  const grid = `<defs><pattern id="g${c.num}" width="20" height="20" patternUnits="userSpaceOnUse">
+    <path d="M20 0 L0 0 0 20" fill="none" stroke="${c.coverColor}" stroke-opacity="0.12" stroke-width="1"/>
+  </pattern></defs><rect width="400" height="250" fill="url(#g${c.num})"/>`;
+
+  let motif = "";
+  if(c.coverMotif === "qr"){
+    motif = `<g transform="translate(150,55)">
+      ${[0,1,2,3,4].map(r=>[0,1,2,3,4].map(col=>{
+        if(Math.random()>0.45) return `<rect x="${col*20}" y="${r*20}" width="16" height="16" fill="${c.coverColor}" opacity="0.85"/>`;
+        return '';
+      }).join('')).join('')}
+      <rect x="0" y="0" width="36" height="36" fill="none" stroke="${c.coverColor}" stroke-width="6"/>
+      <rect x="64" y="0" width="36" height="36" fill="none" stroke="${c.coverColor}" stroke-width="6"/>
+      <rect x="0" y="64" width="36" height="36" fill="none" stroke="${c.coverColor}" stroke-width="6"/>
+    </g>`;
+  } else if(c.coverMotif === "doc"){
+    motif = `<g transform="translate(150,35)">
+      <rect x="0" y="0" width="100" height="130" rx="4" fill="none" stroke="${c.coverColor}" stroke-width="3"/>
+      <line x1="16" y1="30" x2="84" y2="30" stroke="${c.coverColor}" stroke-width="3"/>
+      <line x1="16" y1="48" x2="84" y2="48" stroke="${c.coverColor}" stroke-width="3"/>
+      <line x1="16" y1="66" x2="60" y2="66" stroke="${c.coverColor}" stroke-width="3"/>
+      <line x1="16" y1="92" x2="84" y2="92" stroke="${c.coverColor}" stroke-width="3" stroke-dasharray="4 4"/>
+      <line x1="16" y1="108" x2="84" y2="108" stroke="${c.coverColor}" stroke-width="3" stroke-dasharray="4 4"/>
+    </g>`;
+  } else if(c.coverMotif === "pulse"){
+    motif = `<polyline points="40,170 110,170 130,100 155,200 175,60 200,170 360,170"
+      fill="none" stroke="${c.coverColor}" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>`;
+  } else if(c.coverMotif === "funnel"){
+    motif = `<g transform="translate(140,40)">
+      <path d="M0 0 H120 L90 40 H30 Z" fill="${c.coverColor}" opacity="0.85"/>
+      <path d="M30 50 H90 L72 90 H48 Z" fill="${c.coverColor}" opacity="0.6"/>
+      <path d="M48 100 H72 L62 140 H58 Z" fill="${c.coverColor}" opacity="0.4"/>
+    </g>`;
+  } else if(c.coverMotif === "coin"){
+    motif = `<g>
+      <circle cx="150" cy="100" r="38" fill="none" stroke="${c.coverColor}" stroke-width="4"/>
+      <circle cx="200" cy="130" r="30" fill="none" stroke="${c.coverColor}" stroke-width="4"/>
+      <circle cx="250" cy="90" r="22" fill="none" stroke="${c.coverColor}" stroke-width="4"/>
+    </g>`;
+  }
+  return base + grid + motif + `</svg>`;
+}
+
+const grid = document.getElementById('caseGrid');
+const allFrameworks = [...new Set(cases.flatMap(c=>c.frameworks))];
+
+function renderFilters(){
+  const strip = document.getElementById('filterStrip');
+  allFrameworks.forEach(fw=>{
+    const btn = document.createElement('button');
+    btn.className = 'fw-tag';
+    btn.textContent = fw;
+    btn.dataset.fw = fw;
+    btn.addEventListener('click', ()=>toggleFilter(fw, btn));
+    strip.appendChild(btn);
+  });
+}
+
+let activeFilter = null;
+function toggleFilter(fw, btn){
+  const allBtns = document.querySelectorAll('.fw-tag');
+  if(activeFilter === fw){
+    activeFilter = null;
+    allBtns.forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.card').forEach(c=>c.classList.remove('dimmed'));
+  } else {
+    activeFilter = fw;
+    allBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card').forEach(c=>{
+      if(c.dataset.frameworks.includes(fw)){
+        c.classList.remove('dimmed');
+      } else {
+        c.classList.add('dimmed');
+      }
+    });
+  }
+}
+
+function renderCards(){
+  cases.forEach(c=>{
+    const card = document.createElement('a');
+    card.href = c.href;
+    card.className = 'card';
+    card.setAttribute('data-num', 'CASE ' + c.num);
+    card.dataset.frameworks = c.frameworks.join('|');
+
+    card.innerHTML = `
+      <span class="stamp ${c.status === 'live' ? 'live' : 'progress'}">${c.status === 'live' ? 'Live' : 'In progress'}</span>
+      <div class="card-cover">${svgCover(c)}</div>
+      <div class="card-title">${c.title}</div>
+      <div class="card-q">${c.q}</div>
+      <div class="card-foot">
+        <div class="fw-tags">${c.frameworks.map(f=>`<span class="fw-pill">${f}</span>`).join('')}</div>
+        <span class="read-link">Read case
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+renderFilters();
+renderCards();
+</script>
+
+</body>
+</html>
