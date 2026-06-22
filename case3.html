@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study - Simmering</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f7f5f0;
+            color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #fdfbf7;
+            border: 1px solid #d3cdbfa0;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            padding: 28px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .case-badge {
+            background-color: #111111;
+            color: #ffffff;
+            font-family: monospace;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            position: absolute;
+            top: -12px;
+            left: 24px;
+        }
+
+        .status-stamp {
+            border: 1.5px dashed #b35936;
+            color: #b35936;
+            font-family: monospace;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            padding: 5px 12px;
+            border-radius: 4px;
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            transform: rotate(-3deg);
+            text-transform: uppercase;
+            animation: gentle-wobble 4s ease-in-out infinite;
+        }
+
+        .illustration-container {
+            background-color: #ebdcd0;
+            background-image: linear-gradient(#e3d2c5 1px, transparent 1px), linear-gradient(90deg, #e3d2c5 1px, transparent 1px);
+            background-size: 20px 20px;
+            border-radius: 8px;
+            height: 220px;
+            margin-top: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .icon-graphic {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .fork, .knife {
+            font-size: 28px;
+            color: #b35936;
+            font-weight: 300;
+            opacity: 0.8;
+            user-select: none;
+        }
+
+        .target-circles {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border: 3px solid #b35936;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .target-circles::before {
+            content: '';
+            position: absolute;
+            width: 66px;
+            height: 66px;
+            border: 2px solid #b35936;
+            border-radius: 50%;
+        }
+
+        .target-circles::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: #b35936;
+            border-radius: 50%;
+            animation: simmer-heat 2s ease-in-out infinite alternate;
+        }
+
+        .small-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: #b35936;
+            border-radius: 50%;
+            bottom: 22px;
+            right: 26px;
+        }
+
+        .content h1 {
+            font-family: "Georgia", serif;
+            font-size: 24px;
+            line-height: 1.3;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #111111;
+        }
+
+        .content p {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: #555555;
+            margin-bottom: 24px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ebdcd080;
+            padding-top: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 6px;
+        }
+
+        .tag {
+            background-color: transparent;
+            border: 1px solid #d3cdbf;
+            color: #767064;
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #b35936;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateX(4px);
+        }
+
+        @keyframes simmer-heat {
+            0% { transform: scale(0.9); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        @keyframes gentle-wobble {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(-1deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="case-badge">CASE 03</div>
+        <div class="status-stamp">Simmering</div>
+
+        <div class="illustration-container">
+            <div class="icon-graphic">
+                <span class="fork">F</span>
+                <div class="target-circles">
+                    <div class="small-dot"></div>
+                </div>
+                <span class="knife">¶</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1>Ownly by Rapido: reading the model behind a new food delivery entrant</h1>
+            <p>Rapido's food delivery push is a big bet on its network. We're currently putting the final touches on this breakdown—it's in the oven and smells incredible. This case study will be served fresh in a few days.</p>
+        </div>
+
+        <div class="footer">
+            <div class="tags">
+                <span class="tag">JTBD</span>
+                <span class="tag">Kano</span>
+                <span class="tag">A/B Testing</span>
+            </div>
+            <button class="action-btn">
+                Remind me when it's hot <span>→</span>
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>
