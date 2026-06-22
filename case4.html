@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case 04 — Matiks: Match Report · Anjana</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root{
+    --black:   #0D0D0D;
+    --black-2: #141414;
+    --card:    #1E1E1E;
+    --card-2:  #272727;
+    --line:    #333333;
+    --white:   #F0F0F0;
+    --soft:    #999999;
+    --mute:    #555555;
+    --lime:    #C8F73E;
+    --lime-dim:rgba(200,247,62,0.12);
+    --lime-mid:rgba(200,247,62,0.22);
+    --red:     #FF3B3B;
+    --red-dim: rgba(255,59,59,0.12);
+    --amber:   #FFB800;
+    --amber-dim:rgba(255,184,0,0.12);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  a{ color:inherit; text-decoration:none; }
+  :focus-visible{ outline:2px solid var(--lime); outline-offset:2px; }
+
+  /* ===== Header ===== */
+  header{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:26px clamp(20px,5vw,64px) 16px;
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0;
+    background:rgba(13,13,13,0.95);
+    backdrop-filter:blur(10px);
+    z-index:50;
+  }
+  .logo{ font-family:'Inter', sans-serif; font-weight:900; font-size:1.05rem; letter-spacing:-0.02em; color:var(--white); }
+  .logo .dot{ color:var(--lime); }
+  nav.headlinks{ display:flex; gap:26px; align-items:center; }
+  nav.headlinks a{
+    font-size:0.78rem; font-weight:600; color:var(--soft);
+    border-bottom:1px solid transparent;
+    transition:color .18s, border-color .18s; padding-bottom:2px;
+  }
+  nav.headlinks a:hover{ color:var(--lime); border-color:var(--lime); }
+  .back-link{ display:flex; align-items:center; gap:6px; }
+  .back-link svg{ width:13px; height:13px; }
+
+  /* ===== Hero ===== */
+  .case-hero{
+    padding:clamp(40px,7vw,80px) clamp(20px,5vw,64px) 0;
+    max-width:1100px;
+  }
+  .case-tags{ display:flex; gap:8px; align-items:center; margin-bottom:20px; flex-wrap:wrap; }
+  .tag-num{
+    font-family:'JetBrains Mono', monospace; font-size:0.7rem; font-weight:700;
+    background:var(--lime); color:var(--black); padding:4px 10px 3px; border-radius:2px;
+  }
+  .tag-type{
+    font-family:'JetBrains Mono', monospace; font-size:0.68rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.08em;
+    border:1.5px solid var(--red); color:var(--red); padding:3px 9px; border-radius:2px;
+  }
+  .tag-streak{
+    font-family:'JetBrains Mono', monospace; font-size:0.68rem; font-weight:600;
+    background:var(--amber-dim); color:var(--amber); border:1px solid var(--amber);
+    padding:3px 9px; border-radius:2px; display:flex; align-items:center; gap:5px;
+  }
+  h1.case-title{
+    font-weight:900; font-size:clamp(2.2rem,5vw,3.8rem);
+    line-height:1.0; letter-spacing:-0.03em; max-width:14ch; color:#fff;
+  }
+  h1.case-title .accent{ color:var(--lime); }
+  .case-sub{
+    margin-top:20px; max-width:60ch; font-size:1rem;
+    color:var(--soft); line-height:1.7;
+  }
+  .fw-row{ margin-top:22px; display:flex; gap:8px; flex-wrap:wrap; }
+  .fw-pill{
+    font-family:'JetBrains Mono', monospace; font-size:0.68rem;
+    padding:5px 12px; border:1px solid var(--line); border-radius:2px;
+    color:var(--soft); background:var(--card);
+  }
+
+  /* ===== Scoreboard ticker ===== */
+  .scoreboard{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    border:1px solid var(--line); border-radius:4px;
+    overflow:hidden; margin:48px 0 0;
+    max-width:1100px;
+  }
+  .score-cell{
+    padding:28px 28px 24px; border-right:1px solid var(--line);
+    position:relative; overflow:hidden;
+  }
+  .score-cell:last-child{ border-right:none; }
+  .score-cell::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:2px;
+  }
+  .score-cell.lime::before{ background:var(--lime); }
+  .score-cell.red::before{ background:var(--red); }
+  .score-cell.amber::before{ background:var(--amber); }
+  .score-val{
+    font-family:'JetBrains Mono', monospace; font-weight:700;
+    font-size:clamp(2rem,4vw,3.2rem); letter-spacing:-0.02em; line-height:1;
+    display:block;
+  }
+  .score-cell.lime .score-val{ color:var(--lime); }
+  .score-cell.red .score-val{ color:var(--red); }
+  .score-cell.amber .score-val{ color:var(--amber); }
+  .score-label{ font-size:0.76rem; color:var(--soft); margin-top:8px; display:block; }
+  .score-sub{ font-family:'JetBrains Mono', monospace; font-size:0.62rem; color:var(--mute); margin-top:4px; }
+
+  /* ===== Layout ===== */
+  .case-body{
+    display:grid; grid-template-columns:220px 1fr; gap:48px;
+    max-width:1100px; margin:0 auto;
+    padding:48px clamp(20px,5vw,64px) 100px; align-items:start;
+  }
+  .side-nav{ position:sticky; top:88px; display:flex; flex-direction:column; gap:2px; border-left:2px solid var(--line); }
+  .side-nav button{
+    all:unset; cursor:pointer; font-size:0.82rem; font-weight:600; color:var(--mute);
+    padding:9px 0 9px 18px; border-left:2px solid transparent; margin-left:-2px;
+    transition:color .18s, border-color .18s;
+  }
+  .side-nav button:hover{ color:var(--white); }
+  .side-nav button.active{ color:var(--lime); border-left:2px solid var(--lime); }
+  .side-nav .step-no{ font-family:'JetBrains Mono', monospace; font-size:0.66rem; margin-right:8px; color:var(--mute); }
+  .side-nav button.active .step-no{ color:var(--red); }
+
+  .panels{ min-width:0; }
+  .panel{ display:none; animation:fadeIn .2s ease; }
+  .panel.active{ display:block; }
+  @keyframes fadeIn{ from{opacity:0;transform:translateY(5px);} to{opacity:1;transform:translateY(0);} }
+
+  /* ===== Panel typography ===== */
+  .verdict-row{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .verdict-label{
+    font-family:'JetBrains Mono', monospace; font-size:0.7rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.1em; color:var(--mute);
+  }
+  .verdict-score{
+    font-family:'JetBrains Mono', monospace; font-weight:700; font-size:1rem;
+    padding:3px 10px; border-radius:2px;
+  }
+  .verdict-score.good{ background:var(--lime-dim); color:var(--lime); border:1px solid var(--lime); }
+  .verdict-score.bad{ background:var(--red-dim); color:var(--red); border:1px solid var(--red); }
+  .verdict-score.mid{ background:var(--amber-dim); color:var(--amber); border:1px solid var(--amber); }
+
+  .panel h2{
+    font-weight:900; font-size:clamp(1.5rem,3vw,2rem);
+    letter-spacing:-0.02em; margin-bottom:18px; color:#fff; line-height:1.1;
+  }
+  .panel p{ margin-bottom:14px; color:var(--soft); font-size:0.92rem; line-height:1.75; }
+  .panel strong{ color:var(--white); font-weight:700; }
+  .panel em{ color:var(--lime); font-style:normal; font-weight:600; }
+
+  /* ===== Match finding cards ===== */
+  .finding-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:22px 0; }
+  .finding-card{
+    background:var(--card); border:1px solid var(--line); border-radius:4px;
+    padding:18px 16px; border-top:2px solid;
+  }
+  .finding-card.good{ border-top-color:var(--lime); }
+  .finding-card.bad{ border-top-color:var(--red); }
+  .finding-card.mid{ border-top-color:var(--amber); }
+  .finding-title{ font-weight:700; font-size:0.88rem; color:var(--white); margin-bottom:6px; }
+  .finding-body{ font-size:0.8rem; color:var(--soft); line-height:1.6; }
+
+  /* ===== Evidence block (your personal observation) ===== */
+  .evidence{
+    background:var(--red-dim); border:1px solid var(--red);
+    border-radius:4px; padding:18px 18px; margin:20px 0;
+  }
+  .evidence-label{
+    font-family:'JetBrains Mono', monospace; font-size:0.66rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--red); margin-bottom:8px; display:block;
+  }
+  .evidence p{ color:var(--white); font-size:0.88rem; margin-bottom:0; }
+  .evidence-streak{
+    background:var(--amber-dim); border-color:var(--amber);
+  }
+  .evidence-streak .evidence-label{ color:var(--amber); }
+
+  /* ===== Callout ===== */
+  .callout{
+    background:var(--lime-dim); border-left:3px solid var(--lime);
+    padding:16px 18px; border-radius:2px; font-size:0.88rem;
+    margin:20px 0; color:var(--white); line-height:1.7;
+  }
+  .callout b{
+    font-family:'JetBrains Mono', monospace; font-size:0.68rem; text-transform:uppercase;
+    display:block; margin-bottom:8px; letter-spacing:0.06em; color:var(--lime);
+  }
+  .callout.red{ background:var(--red-dim); border-left-color:var(--red); }
+  .callout.red b{ color:var(--red); }
+  .callout.amber{ background:var(--amber-dim); border-left-color:var(--amber); }
+  .callout.amber b{ color:var(--amber); }
+
+  /* ===== Recommendation blocks ===== */
+  .rec-block{
+    background:var(--card); border:1px solid var(--line); border-radius:4px;
+    padding:24px 22px; margin:22px 0; position:relative;
+  }
+  .rec-num{
+    position:absolute; top:-14px; left:20px;
+    font-family:'JetBrains Mono', monospace; font-size:0.7rem; font-weight:700;
+    background:var(--lime); color:var(--black); padding:4px 10px; border-radius:2px;
+    text-transform:uppercase; letter-spacing:0.06em;
+  }
+  .rec-title{ font-weight:800; font-size:1.05rem; color:#fff; margin-bottom:8px; margin-top:4px; }
+  .rec-why{ font-size:0.82rem; color:var(--soft); margin-bottom:14px; line-height:1.7; }
+  .rec-what{ font-size:0.88rem; color:var(--white); line-height:1.7; }
+  .rec-what strong{ color:var(--lime); }
+  .rec-metric{
+    margin-top:14px; padding-top:14px; border-top:1px solid var(--line);
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--soft);
+  }
+  .rec-metric span{ color:var(--lime); font-weight:600; }
+
+  /* ===== Stat grid ===== */
+  .stat-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin:20px 0; }
+  .stat-card{ background:var(--card); border:1px solid var(--line); border-radius:4px; padding:16px 14px; }
+  .stat-num{ font-family:'JetBrains Mono', monospace; font-weight:700; font-size:1.6rem; color:var(--lime); }
+  .stat-label{ font-size:0.72rem; color:var(--soft); margin-top:4px; line-height:1.4; }
+  .stat-src{ font-family:'JetBrains Mono', monospace; font-size:0.6rem; color:var(--mute); margin-top:6px; }
+
+  /* ===== Hook model / AARRR table ===== */
+  .framework-table{ width:100%; border-collapse:collapse; margin:20px 0; font-size:0.84rem; }
+  .framework-table th{
+    font-family:'JetBrains Mono', monospace; font-size:0.66rem; text-transform:uppercase;
+    letter-spacing:0.05em; color:var(--mute); text-align:left; padding:8px 12px;
+    border-bottom:1.5px solid var(--lime);
+  }
+  .framework-table td{ padding:10px 12px; border-bottom:1px solid var(--line); color:var(--soft); vertical-align:top; }
+  .framework-table td:first-child{ font-weight:700; color:var(--white); width:120px; }
+  .framework-table .highlight td{ color:var(--white); background:var(--red-dim); }
+  .framework-table .highlight td:first-child{ color:var(--red); }
+
+  /* ===== Journey steps ===== */
+  .journey{ display:flex; flex-direction:column; margin:22px 0; }
+  .j-step{ display:grid; grid-template-columns:34px 1fr; gap:14px; padding-bottom:22px; position:relative; }
+  .j-step:not(:last-child)::before{ content:""; position:absolute; left:16px; top:32px; bottom:0; width:1px; background:var(--line); }
+  .j-num{
+    width:32px; height:32px; border-radius:2px; background:var(--lime); color:var(--black);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem; font-weight:700; flex-shrink:0;
+  }
+  .j-num.red{ background:var(--red); color:#fff; }
+  .j-content h3{ font-weight:700; font-size:0.92rem; color:#fff; margin-bottom:4px; }
+  .j-content p{ font-size:0.82rem; color:var(--soft); margin-bottom:0; }
+
+  .sources-block{ margin-top:24px; padding-top:14px; border-top:1px dashed var(--line); font-size:0.7rem; color:var(--mute); font-family:'JetBrains Mono', monospace; line-height:1.8; }
+  .sources-block li{ list-style:none; margin-bottom:2px; }
+
+  /* ===== Footer nav ===== */
+  .case-foot-nav{
+    display:flex; justify-content:space-between; align-items:center;
+    max-width:1100px; margin:0 auto; padding:26px clamp(20px,5vw,64px) 60px;
+    border-top:1px solid var(--line);
+  }
+  .case-foot-nav a{ font-size:0.82rem; font-weight:600; color:var(--soft); display:flex; align-items:center; gap:6px; }
+  .case-foot-nav a:hover{ color:var(--lime); }
+
+  footer{
+    border-top:1px solid var(--line); padding:22px clamp(20px,5vw,64px) 36px;
+    display:flex; justify-content:space-between; font-size:0.76rem; color:var(--mute); flex-wrap:wrap; gap:10px;
+  }
+
+  @media(max-width:860px){
+    .case-body{ grid-template-columns:1fr; }
+    .scoreboard{ grid-template-columns:1fr 1fr; }
+    .scoreboard .score-cell:nth-child(2){ border-right:none; }
+    .scoreboard .score-cell:nth-child(3){ border-top:1px solid var(--line); grid-column:1/-1; }
+    .side-nav{
+      position:static; flex-direction:row; flex-wrap:wrap; border-left:none;
+      border-bottom:1px solid var(--line); padding-bottom:14px; gap:8px;
+    }
+    .side-nav button{ border-left:none; border:1px solid var(--line); border-radius:2px; padding:6px 12px; margin-left:0; font-size:0.74rem; }
+    .side-nav button.active{ border-color:var(--lime); background:var(--lime-dim); }
+  }
+  @media(max-width:560px){
+    header{ flex-direction:column; align-items:flex-start; gap:12px; }
+    .scoreboard{ grid-template-columns:1fr; }
+    .scoreboard .score-cell{ border-right:none; border-top:1px solid var(--line); }
+    .scoreboard .score-cell:first-child{ border-top:none; }
+  }
+  @media(prefers-reduced-motion:reduce){ *{ scroll-behavior:auto!important; transition:none!important; animation:none!important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">anjana<span class="dot">.</span>pm</div>
+  <nav class="headlinks">
+    <a class="back-link" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      All cases
+    </a>
+    <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="mailto:youremail@example.com">Contact</a>
+  </nav>
+</header>
+
+<section class="case-hero">
+  <div class="case-tags">
+    <span class="tag-num">CASE 04</span>
+    <span class="tag-type">Product Teardown</span>
+    <span class="tag-streak">🔥 40-day streak — personal user</span>
+  </div>
+  <h1 class="case-title">Matiks: <span class="accent">Match Report</span></h1>
+  <p class="case-sub">Matiks is building the right thing — competitive math as a sport, not a chore. But three problems are quietly eroding the core experience. This is a PM teardown from someone who actually plays.</p>
+  <div class="fw-row">
+    <span class="fw-pill">Hook Model</span>
+    <span class="fw-pill">AARRR</span>
+    <span class="fw-pill">User Research</span>
+    <span class="fw-pill">Anti-cheat Design</span>
+    <span class="fw-pill">Monetisation</span>
+  </div>
+</section>
+
+<!-- Scoreboard ticker -->
+<div style="max-width:1100px; padding:0 clamp(20px,5vw,64px);">
+  <div class="scoreboard">
+    <div class="score-cell lime">
+      <span class="score-val mono" id="count-users">0</span>
+      <span class="score-label">Registered users</span>
+      <span class="score-sub">as of Aug 2025 funding round</span>
+    </div>
+    <div class="score-cell red">
+      <span class="score-val mono">$3.14M</span>
+      <span class="score-label">Pre-Series A raised</span>
+      <span class="score-sub">Tanglin Ventures · Info Edge · Aman Gupta</span>
+    </div>
+    <div class="score-cell amber">
+      <span class="score-val mono" id="count-market">0</span>
+      <span class="score-label">India gaming market by 2034</span>
+      <span class="score-sub">from $5.91B in 2025 · 14.6% CAGR</span>
+    </div>
+  </div>
+</div>
+
+<div class="case-body">
+
+  <nav class="side-nav" id="sideNav">
+    <button data-panel="what" class="active"><span class="step-no mono">01</span>What Matiks is</button>
+    <button data-panel="working"><span class="step-no mono">02</span>What's working</button>
+    <button data-panel="broken"><span class="step-no mono">03</span>What's broken</button>
+    <button data-panel="rec1"><span class="step-no mono">04</span>Fix: integrity</button>
+    <button data-panel="rec2"><span class="step-no mono">05</span>Fix: onboarding</button>
+    <button data-panel="rec3"><span class="step-no mono">06</span>Fix: monetisation</button>
+    <button data-panel="reflections"><span class="step-no mono">07</span>Reflections</button>
+  </nav>
+
+  <div class="panels">
+
+    <!-- 01 WHAT MATIKS IS -->
+    <div class="panel active" id="panel-what">
+      <div class="verdict-row">
+        <span class="verdict-label">Section</span>
+        <span class="verdict-score mid">Context</span>
+      </div>
+      <h2>What Matiks actually is</h2>
+      <p>Matiks is a <strong>competitive math gaming app</strong> — founded September 2024, Bengaluru, by Sudhanshu Bhatia, Mohan Kumar, and Sushant Timmapur. The core bet: math as an e-sport, not a textbook. You drop into a 1v1 live duel within seconds of opening the app, solve arithmetic or logic puzzles under a timer against a real opponent, and climb a global ELO leaderboard.</p>
+      <p>It raised <strong>$3.14M pre-Series A in August 2025</strong> led by Tanglin Ventures with Info Edge Ventures and a notable angel lineup: boAt's Aman Gupta, Unacademy co-founders Gaurav Munjal and Roman Saini, Scapia's Anil Goteti. The roster signals conviction that this is a real category — not a niche edtech experiment.</p>
+
+      <div class="finding-grid">
+        <div class="finding-card mid">
+          <div class="finding-title">Live 1v1 Math Duels</div>
+          <div class="finding-body">ELO-matched head-to-head — DMAS, speed arithmetic, timed battles. Core loop.</div>
+        </div>
+        <div class="finding-card mid">
+          <div class="finding-title">CrossMath & KenKen</div>
+          <div class="finding-body">Logic puzzle modes layered on top of raw speed — deepens the skill ceiling.</div>
+        </div>
+        <div class="finding-card mid">
+          <div class="finding-title">Social Feed + Streaks</div>
+          <div class="finding-body">FOMO loop — see who's climbing, who dropped off, whose streak is longer than yours.</div>
+        </div>
+        <div class="finding-card mid">
+          <div class="finding-title">Creators Programme</div>
+          <div class="finding-body">Paid feature — host tournaments, build communities inside the app.</div>
+        </div>
+      </div>
+
+      <p>The timing is also significant. <strong>India's Online Gaming Act (Aug 2025) banned real money gaming</strong> — Dream11, MPL, Games24x7 all took a major hit. <em>Casual skill gaming stepped into a vacuum.</em> Matiks is well-positioned to capture habitual gaming attention from users who can no longer bet on cricket.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">517M</div>
+          <div class="stat-label">projected Indian gamers in 2025</div>
+          <div class="stat-src">Demandsage, 2026</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">84.6%</div>
+          <div class="stat-label">of India gaming market is mobile</div>
+          <div class="stat-src">Mordor Intelligence, 2026</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">&lt;20</div>
+          <div class="stat-label">employees — a tiny team for 100K users</div>
+          <div class="stat-src">Inc42, Aug 2025</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <b>Why this teardown</b>
+        I have a 40-day active streak on Matiks. That's not a casual download — I'm someone who competed in math at university level and found this app genuinely re-activating that part of my brain. The things I'm flagging below aren't theoretical; they're things I ran into personally.
+      </div>
+
+      <div class="sources-block">
+        <li>[1] Inc42, "Matiks Raises $3.14Mn," Aug 2025</li>
+        <li>[2] Demandsage, "Online Gaming Statistics India," 2026</li>
+        <li>[3] Mordor Intelligence, India Gaming Market report, 2026</li>
+        <li>[4] Inc42, "Real money gaming ban — Online Gaming Bill 2025"</li>
+      </div>
+    </div>
+
+    <!-- 02 WHAT'S WORKING -->
+    <div class="panel" id="panel-working">
+      <div class="verdict-row">
+        <span class="verdict-label">Verdict</span>
+        <span class="verdict-score good">Score: 8 / 10</span>
+      </div>
+      <h2>What Matiks is getting right</h2>
+      <p>The product's core loop is strong. Most of what makes it work isn't flashy — it's disciplined application of a well-understood behavior design framework executed tightly.</p>
+
+      <table class="framework-table">
+        <thead>
+          <tr><th>Hook Phase</th><th>What Matiks does</th><th>Why it works</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Trigger</td><td>Streak notifications, social feed showing friend activity</td><td>External FOMO converted to internal habit after ~7 days</td></tr>
+          <tr><td>Action</td><td>Speed-to-first-duel in under 10 seconds, no long tutorial</td><td>Lowest friction path to the dopamine hit</td></tr>
+          <tr><td>Reward</td><td>Variable — you don't know if you'll win, ELO is real</td><td>Unpredictable outcome = compulsive re-engagement</td></tr>
+          <tr><td>Investment</td><td>ELO rating, streak count, public accuracy stats</td><td>Sunk cost that makes leaving expensive</td></tr>
+        </tbody>
+      </table>
+
+      <div class="finding-grid">
+        <div class="finding-card good">
+          <div class="finding-title">Clean, fast UI</div>
+          <div class="finding-body">Universally praised across iOS and Android reviews. No clutter. The app gets out of the way and lets the duel happen.</div>
+        </div>
+        <div class="finding-card good">
+          <div class="finding-title">ELO makes competition feel real</div>
+          <div class="finding-body">A rating system that actually moves based on opponent skill, not just games played. This is the right call — it gives skilled users something to chase.</div>
+        </div>
+        <div class="finding-card good">
+          <div class="finding-title">Social feed creates FOMO</div>
+          <div class="finding-body">Seeing a friend's streak climb while yours stalls is surprisingly effective. Passive accountability without nagging.</div>
+        </div>
+        <div class="finding-card good">
+          <div class="finding-title">Stats as flex, not report card</div>
+          <div class="finding-body">Speed, accuracy, consistency shown as a public scoreboard. Users aren't graded — they're ranked. Big psychological difference.</div>
+        </div>
+      </div>
+
+      <p>The ambition to be the <em>"Duolingo of math"</em> — a platform where brain fitness meets competitive play — is genuinely differentiated in the Indian market. Duolingo owns language; <strong>nobody owns math at this engagement level</strong>. That's a real white space, and Matiks is the most credible attempt at filling it so far.</p>
+    </div>
+
+    <!-- 03 WHAT'S BROKEN -->
+    <div class="panel" id="panel-broken">
+      <div class="verdict-row">
+        <span class="verdict-label">Verdict</span>
+        <span class="verdict-score bad">Score: 4 / 10</span>
+      </div>
+      <h2>Three things that are actively eroding the experience</h2>
+      <p>The core loop works. The problems are all trust and fairness issues — and in a competitive product, trust is the product. If the leaderboard is fake, the ELO means nothing. If exits aren't penalised, winning a duel means nothing. These aren't cosmetic bugs; they threaten retention of exactly the high-skill users Matiks most needs to keep.</p>
+
+      <div class="evidence">
+        <span class="evidence-label">🔍 Personal observation — leaderboard integrity</span>
+        <p><strong>I saw a public contest score of 80 questions answered in 1 minute 47 seconds.</strong> That's ~1.3 seconds per question, sustained across 80 answers. For arithmetic problems, this is humanly impossible at any reasonable difficulty — it's either calculator use, a second device, or a multi-account setup. This score appeared on the public leaderboard with no flag, no review, no asterisk.</p>
+      </div>
+
+      <div class="evidence">
+        <span class="evidence-label">🔍 Personal observation — mid-game exits</span>
+        <p>Players frequently quit mid-duel when losing. <strong>The penalty for exiting is not sufficient to disincentivise it</strong> — and the person who stays loses their time and gets a corrupted result. In a game built on competitive fairness, a rage-quit that has no real cost is a design failure.</p>
+      </div>
+
+      <div class="evidence">
+        <span class="evidence-label">🔍 Personal observation — XP vs. skill</span>
+        <p><strong>XP accumulates through volume, not quality.</strong> A player grinding easy DMAS rounds looks identical in XP to someone winning CrossMath duels at high difficulty. This means XP is not a meaningful signal of skill — it's a measure of time spent. When low-skill players carry inflated XP, matchmaking degrades: <strong>I've been paired against opponents who couldn't answer basic arithmetic that any competitive-level player would treat as a warm-up.</strong></p>
+      </div>
+
+      <p>The developer acknowledged matchmaking and stability as "known issues" in a January 2026 App Store response. <strong>Known isn't fixed.</strong> And these three problems compound each other: inflated leaderboards make skilled users feel the game isn't worth winning; bad matchmaking makes every session feel random; exits without consequences remove any stakes from a match.</p>
+
+      <table class="framework-table">
+        <thead>
+          <tr><th>AARRR Stage</th><th>Current state</th><th>Problem</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Acquisition</td><td>50K+ downloads, 100K users</td><td>Strong — no issue here</td></tr>
+          <tr><td>Activation</td><td>Fast first-duel, minimal onboarding</td><td>Works for simple modes; breaks for Anzan / complex formats</td></tr>
+          <tr class="highlight"><td>Retention</td><td>Streaks + ELO working</td><td>Undermined by fake scores, bad matchmaking, exits</td></tr>
+          <tr class="highlight"><td>Referral</td><td>Social feed present</td><td>Users won't refer friends to a rigged-feeling leaderboard</td></tr>
+          <tr class="highlight"><td>Revenue</td><td>Creators Programme (paid)</td><td>No clear path to scale revenue past a small power-user cohort</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 04 REC 1: INTEGRITY -->
+    <div class="panel" id="panel-rec1">
+      <div class="verdict-row">
+        <span class="verdict-label">Recommendation 01</span>
+        <span class="verdict-score bad">Priority: High</span>
+      </div>
+      <h2>Fix leaderboard integrity and exit penalties</h2>
+
+      <div class="rec-block">
+        <div class="rec-num">Problem</div>
+        <div class="rec-title">Impossible scores are visible with no flag. Mid-game exits have no real cost.</div>
+        <div class="rec-why">Both are trust problems. A player who sees an 80-question-in-1:47 score on a public leaderboard doesn't think "that person is amazing" — they think "this game is rigged." Once that thought lands, the competitive motivation that makes Matiks work collapses. The same logic applies to exits: if quitting a duel you're losing costs nothing, every close match becomes a lottery on whether your opponent feels like finishing.</div>
+        <div class="rec-what">
+          <strong>What I'd ship first — statistical anomaly flagging:</strong> Set a per-question speed threshold for each game mode (e.g. DMAS at the 99th percentile of all verified human scores). Any contest submission that exceeds this threshold gets auto-flagged and held from the live leaderboard until a lightweight review triggers. This doesn't require a full anti-cheat system — it's a <strong>simple statistical filter on the output side</strong>, not real-time surveillance.
+          <br><br>
+          <strong>Exit penalty redesign:</strong> A player who exits mid-duel should receive: (1) an immediate ELO loss equal to a full loss, (2) a short cooldown before their next match (60–90 seconds), and (3) a "forfeit" marker on their recent match history visible to them. None of these require real-time detection — they're applied at session-end when an exit is confirmed. The cooldown alone is enough to make rage-quitting feel costly without being punitive to genuine disconnects.
+        </div>
+        <div class="rec-metric">North star metric: <span>% of top-50 leaderboard scores that pass anomaly threshold</span> · target: 95%+ within 60 days of shipping</div>
+      </div>
+
+      <div class="callout red">
+        <b>Why this is the highest priority</b>
+        The users most damaged by fake leaderboards are the highest-skill users — the ones who would become Matiks' most vocal advocates if the competitive integrity were real. Matiks cannot build a mind-sport brand on a foundation that serious players don't trust. Fix this before spending on marketing or new features.
+      </div>
+    </div>
+
+    <!-- 05 REC 2: ONBOARDING -->
+    <div class="panel" id="panel-rec2">
+      <div class="verdict-row">
+        <span class="verdict-label">Recommendation 02</span>
+        <span class="verdict-score mid">Priority: Medium</span>
+      </div>
+      <h2>Fix the onboarding drop-off for non-DMAS game modes</h2>
+
+      <p>The speed-to-first-duel is a genuine strength for DMAS (basic arithmetic). But Matiks has several other modes — CrossMath, KenKen, Anzan — that users bounce off because the app gives a few bullet points and drops them into a live match before they understand what they're even trying to do.</p>
+
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-num red">✗</div>
+          <div class="j-content">
+            <h3>Current flow for Anzan / complex modes</h3>
+            <p>3–4 bullet-point explanation → immediately paired with an opponent → confusing mid-match experience → player loses, feels stupid, exits the mode permanently.</p>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-num">→</div>
+          <div class="j-content">
+            <h3>What I'd change: mode-specific "practice round"</h3>
+            <p>Before the first live duel in any non-DMAS mode, offer one 60-second offline practice — same interface, same timer, but against dummy problems with no ELO at stake. One screen, no tutorial wall, just a live taste that ends with "Ready to play for real?"</p>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-num">→</div>
+          <div class="j-content">
+            <h3>Home screen declutter — "Start Here" path</h3>
+            <p>The home screen currently shows everything at once. For new users (first 3 sessions), pin one featured mode per day — the one with the most active players or the best matchmaking pool — so the first decision is made for them, not left open.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout amber">
+        <b>The risk of leaving this unfixed</b>
+        Matiks' funded roadmap mentions regional language launches and classroom tools. Both rely on reaching users who are less mathematically confident than the early-adopter power users. Those users will bounce even faster at a blank "How to Play" screen. Fix onboarding for complex modes now, before scaling to a wider audience where the drop-off will be steeper.
+      </div>
+
+      <div class="rec-block" style="margin-top:14px;">
+        <div class="rec-num">Metric</div>
+        <div class="rec-title">Mode adoption rate beyond DMAS</div>
+        <div class="rec-why">Currently I'd expect DMAS dominates session starts heavily. The target: percentage of users who play at least one non-DMAS mode in their first 7 days should rise meaningfully after the practice round ships — that's the leading indicator that the onboarding fix is working before it shows up in retention.</div>
+        <div class="rec-metric">Watch for: <span>% users completing ≥1 non-DMAS duel in first 7 days</span> · baseline to be established, target +15pp within 30 days</div>
+      </div>
+    </div>
+
+    <!-- 06 REC 3: MONETISATION -->
+    <div class="panel" id="panel-rec3">
+      <div class="verdict-row">
+        <span class="verdict-label">Recommendation 03</span>
+        <span class="verdict-score mid">Priority: Medium-High</span>
+      </div>
+      <h2>Build a monetisation path that doesn't alienate the core</h2>
+
+      <p>Matiks currently has <strong>100K users</strong> and one paid product: the Creators Programme (hosting tournaments, building communities). That's the right instinct — monetise the power users who get the most from the platform — but it's a thin wedge. Here's the problem: the segment most likely to pay for Creators is exactly the same segment most likely to leave if competitive integrity stays broken. You can't sell a premium tournament product on a platform where the leaderboard is visibly inflated.</p>
+
+      <div class="finding-grid">
+        <div class="finding-card good">
+          <div class="finding-title">What could work: Skill Pass</div>
+          <div class="finding-body">A monthly subscription that unlocks: detailed accuracy breakdowns, opponent performance history post-match, and practice mode for any game format. Targets serious players. Priced at ₹99–149/month — well within India's gaming subscription comfort zone.</div>
+        </div>
+        <div class="finding-card good">
+          <div class="finding-title">What could work: Brand Contests</div>
+          <div class="finding-body">Sponsored weekly contests with a brand prize pool (vouchers, not cash — avoids real money gaming regulations). Brands get visibility in a highly engaged, 15–30 age cohort. Matiks gets contest infrastructure that runs itself.</div>
+        </div>
+        <div class="finding-card bad">
+          <div class="finding-title">What won't work: Pay-to-win anything</div>
+          <div class="finding-body">Any model that lets users buy ELO boosts, skip matchmaking queues, or purchase extra daily challenges that affect competitive standing. Instantly destroys trust in an app that's already fighting integrity perception problems.</div>
+        </div>
+      </div>
+
+      <p>The real monetisation unlock is <strong>scale, not product complexity</strong>. At 100K users, ad revenue from rewarded video would already cover operating costs — <em>ads captured 46.18% of India gaming revenue in 2025</em><span style="font-size:0.78rem;color:var(--mute);"> [Mordor Intelligence]</span>. At 1M users, a Skill Pass at ₹99/month with even 3% conversion is ₹30L/month in recurring revenue. The monetisation strategy right now should be: fix retention first, grow the base, then layer subscriptions. Not the reverse.</p>
+
+      <div class="callout">
+        <b>The sequence matters</b>
+        Integrity fix → Onboarding fix → Scale to 500K users → Launch Skill Pass. In that order. Launching paid features on a platform where high-skill users don't trust the leaderboard is selling premium seats on a bus with no route.
+      </div>
+
+      <div class="sources-block">
+        <li>[5] Mordor Intelligence, India Gaming Market — Ad revenue share, 2026</li>
+        <li>[6] India Mobile Gaming Market, IMARC Group — IAP and subscription growth, 2026</li>
+      </div>
+    </div>
+
+    <!-- 07 REFLECTIONS -->
+    <div class="panel" id="panel-reflections">
+      <div class="verdict-row">
+        <span class="verdict-label">Section</span>
+        <span class="verdict-score mid">Honest take</span>
+      </div>
+      <h2>Reflections</h2>
+
+      <div class="evidence evidence-streak">
+        <span class="evidence-label">📍 Why I have a 40-day streak</span>
+        <p>I captained my university volleyball team and competed in math competitively — both are activities where the score is real, the opponent is real, and the gap between your good days and bad days is visible. Matiks is the first app that's made math feel like that again. <strong>The core concept genuinely works for me as a user.</strong> Which makes the integrity problems more frustrating, not less — I know what this could be if the competitive trust was real.</p>
+      </div>
+
+      <p>The biggest thing I'd flag to Matiks' PM team: <strong>your most engaged users are your harshest critics</strong> — not because they want to leave, but because they care enough to notice when the game is unfair. The 40-day streak user who sees an 80-question-in-1:47 score is not going to quietly accept it. They're going to feel like their investment in the product was wasted.</p>
+      <p>I'd also want Matiks to think carefully about <strong>what "Duolingo of math" actually means</strong> — because Duolingo's core design insight wasn't gamification, it was <em>forgiveness</em>. Losing a streak on Duolingo doesn't feel catastrophic because the app is warm and encouraging. Matiks is the opposite register — it's competitive, fast, high-stakes by design. That's the right call for a certain user, but it means the app has very little room to absorb trust damage before that user walks. The tolerance for unfairness in a high-stakes competitive product is much lower than in a casual learning app.</p>
+      <p>Finally: the <strong>XP-as-volume problem is fixable without rebuilding the system</strong>. Add a secondary visible metric — accuracy-weighted ELO, or "Skill Rating" distinct from XP — that compounds quality of play, not just quantity. Show both. Let users self-select which one they care about. That single change makes XP honest without taking anything away from the users who value grinding.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="case-foot-nav">
+  <a href="case-02.html">
+    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+    Previous case
+  </a>
+  <a href="case-05.html">
+    Next case
+    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</div>
+
+<footer>
+  <span>Bengaluru · 2026</span>
+  <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+</footer>
+
+<script>
+  /* ===== Nav ===== */
+  const navBtns = document.querySelectorAll('.side-nav button');
+  const panels  = document.querySelectorAll('.panel');
+  navBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const t = btn.dataset.panel;
+      navBtns.forEach(b=>b.classList.remove('active'));
+      panels.forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-'+t).classList.add('active');
+      window.scrollTo({top:document.querySelector('.case-body').offsetTop-80,behavior:'smooth'});
+    });
+  });
+
+  /* ===== Scoreboard count-up ===== */
+  function countUp(el, target, suffix, duration){
+    const start = performance.now();
+    const update = (now) => {
+      const p = Math.min((now-start)/duration, 1);
+      const ease = 1-Math.pow(1-p,3);
+      el.textContent = Math.floor(ease*target).toLocaleString('en-IN') + suffix;
+      if(p<1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        countUp(document.getElementById('count-users'), 100000, '+', 1800);
+        countUp(document.getElementById('count-market'), 16.72, 'B', 2200);
+        observer.disconnect();
+      }
+    });
+  },{threshold:0.3});
+  observer.observe(document.querySelector('.scoreboard'));
+</script>
+
+</body>
+</html>
