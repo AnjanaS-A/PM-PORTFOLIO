@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Study - Simmering</title>
+    <title>Work — Case Studies</title>
     <style>
         * {
             box-sizing: border-box;
@@ -14,23 +14,55 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f7f5f0;
-            color: #1a1a1a;
+            color: #111111;
+            padding: 60px 40px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+        }
+
+        .portfolio-container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Top Header Area mimicking a live design site layout */
+        .portfolio-header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid #ebdcd0;
+            padding-bottom: 24px;
+        }
+
+        .portfolio-header h2 {
+            font-family: "Georgia", serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: #111111;
+        }
+
+        /* Structural Grid System */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px 32px;
+            width: 100%;
         }
 
         .card {
             background-color: #fdfbf7;
             border: 1px solid #d3cdbfa0;
             border-radius: 12px;
-            max-width: 500px;
-            width: 100%;
             padding: 28px;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(179, 89, 54, 0.05);
         }
 
         .case-badge {
@@ -76,9 +108,9 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            overflow: hidden;
         }
 
+        /* Micro-interactions for graphic components */
         .icon-graphic {
             display: flex;
             align-items: center;
@@ -157,6 +189,7 @@
             padding-top: 16px;
             flex-wrap: wrap;
             gap: 12px;
+            margin-top: auto;
         }
 
         .tags {
@@ -171,7 +204,6 @@
             font-size: 11px;
             padding: 4px 12px;
             border-radius: 16px;
-            font-family: -apple-system, sans-serif;
         }
 
         .action-btn {
@@ -192,6 +224,18 @@
             transform: translateX(4px);
         }
 
+        /* Generic styles for adjacent mock elements in the layout structure */
+        .card.completed .illustration-container {
+            background-color: #e2ebdf;
+            background-image: linear-gradient(#d5e2d1 1px, transparent 1px), linear-gradient(90deg, #d5e2d1 1px, transparent 1px);
+        }
+        .card.completed .fork, .card.completed .knife, .card.completed .target-circles {
+            color: #3e6b48; border-color: #3e6b48;
+        }
+        .card.completed .target-circles::before { border-color: #3e6b48; }
+        .card.completed .target-circles::after { background-color: #3e6b48; animation: none; }
+        .card.completed .action-btn { color: #3e6b48; }
+
         @keyframes simmer-heat {
             0% { transform: scale(0.9); opacity: 0.8; }
             100% { transform: scale(1.1); opacity: 1; }
@@ -201,38 +245,77 @@
             0%, 100% { transform: rotate(-3deg); }
             50% { transform: rotate(-1deg); }
         }
+
+        @media (max-width: 500px) {
+            body { padding: 40px 16px; }
+            .case-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <div class="case-badge">CASE 03</div>
-        <div class="status-stamp">Simmering</div>
+    <div class="portfolio-container">
+        <div class="portfolio-header">
+            <h2>Product Strategy Breakdowns</h2>
+        </div>
 
-        <div class="illustration-container">
-            <div class="icon-graphic">
-                <span class="fork">F</span>
-                <div class="target-circles">
-                    <div class="small-dot"></div>
+        <div class="case-grid">
+            <!-- Active Simmering Card Block -->
+            <div class="card">
+                <div class="case-badge">CASE 03</div>
+                <div class="status-stamp">Simmering</div>
+
+                <div class="illustration-container">
+                    <div class="icon-graphic">
+                        <span class="fork">F</span>
+                        <div class="target-circles">
+                            <div class="small-dot"></div>
+                        </div>
+                        <span class="knife">¶</span>
+                    </div>
                 </div>
-                <span class="knife">¶</span>
-            </div>
-        </div>
 
-        <div class="content">
-            <h1>Ownly by Rapido: reading the model behind a new food delivery entrant</h1>
-            <p>Rapido's food delivery push is a big bet on its network. I am currently putting the final touches on this breakdown—it's in the oven and smells incredible. This case study will be served fresh in a few days.</p>
-        </div>
+                <div class="content">
+                    <h1>Ownly by Rapido: reading the model behind a new food delivery entrant</h1>
+                    <p>Rapido's food delivery push is a big bet on its network. We're currently putting the final touches on this breakdown—it's in the oven and smells incredible. This case study will be served fresh in a few days.</p>
+                </div>
 
-        <div class="footer">
-            <div class="tags">
-                <span class="tag">JTBD</span>
-                <span class="tag">Kano</span>
-                <span class="tag">A/B Testing</span>
+                <div class="footer">
+                    <div class="tags">
+                        <span class="tag">JTBD</span>
+                        <span class="tag">Kano</span>
+                        <span class="tag">A/B Testing</span>
+                    </div>
+                    <button class="action-btn">
+                        Remind me when it's hot <span>→</span>
+                    </button>
+                </div>
             </div>
-            <button class="action-btn">
-                Remind me when it's hot <span>→</span>
-            </button>
+
+            <!-- Adjacent structural item example to show hierarchy -->
+            <div class="card completed">
+                <div class="case-badge">CASE 02</div>
+                <div class="illustration-container">
+                    <div class="icon-graphic">
+                        <span class="fork">⚡</span>
+                        <div class="target-circles"></div>
+                        <span class="knife">📈</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <h1>Zepto pass and the structural locks of quick commerce</h1>
+                    <p>An analysis exploring the consumer stickiness levers behind micro-subscription passes and high density user mapping optimization mechanics.</p>
+                </div>
+                <div class="footer">
+                    <div class="tags">
+                        <span class="tag">Retention</span>
+                        <span class="tag">Cohorts</span>
+                    </div>
+                    <button class="action-btn">
+                        Read case <span>→</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
